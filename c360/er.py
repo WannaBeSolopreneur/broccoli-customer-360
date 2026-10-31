@@ -14,9 +14,23 @@ from pathlib import Path
 
 # Each rule returns rows (tenant_id, a, b, rule). a and b are record keys.
 RULES: dict[str, str] = {
+    # A phone used by people with different first initials is a household
+    # phone (a shared landline). There, records only match when the first
+    # initial agrees. Records with no name join the most common initial.
     "phone": """
-        SELECT tenant_id, record_key AS a, min(record_key) OVER (PARTITION BY tenant_id, phone_e164) AS b, 'phone' AS rule
-        FROM er.identity_records WHERE phone_e164 IS NOT NULL""",
+        WITH ph AS (
+            SELECT tenant_id, phone_e164,
+                   uniqExactIf(substring(first_name, 1, 1), first_name != '') AS initials,
+                   topKIf(1)(substring(first_name, 1, 1), first_name != '')[1] AS top_initial
+            FROM er.identity_records WHERE phone_e164 IS NOT NULL
+            GROUP BY tenant_id, phone_e164
+        )
+        SELECT r.tenant_id AS tenant_id, r.record_key AS a,
+               min(r.record_key) OVER (PARTITION BY r.tenant_id, r.phone_e164,
+                   if(p.initials > 1, if(r.first_name = '', p.top_initial, substring(r.first_name, 1, 1)), '')) AS b,
+               'phone' AS rule
+        FROM er.identity_records AS r
+        INNER JOIN ph AS p ON p.tenant_id = r.tenant_id AND p.phone_e164 = r.phone_e164""",
     "email": """
         SELECT tenant_id, record_key, min(record_key) OVER (PARTITION BY tenant_id, email), 'email'
         FROM er.identity_records WHERE email IS NOT NULL""",
