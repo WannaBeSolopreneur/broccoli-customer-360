@@ -6,9 +6,12 @@ SELECT j.tenant_id AS tenant_id, j.job_id AS job_id, j.job_number AS job_number,
        j.st_customer_id AS st_customer_id, j.business_unit AS business_unit, j.job_type AS job_type,
        j.booking_source AS booking_source, j.booked_by_broccoli AS booked_by_broccoli, j.broccoli_ref AS broccoli_ref,
        j.created_on AS created_on, j.scheduled_start AS scheduled_start, j.status AS status,
-       j.completed_on AS completed_on, j.total_revenue AS total_revenue, j._loaded_at AS _loaded_at
+       j.completed_on AS completed_on, j.total_revenue AS total_revenue,
+       NOT (toHour(j.created_on + toIntervalHour(t.utc_offset)) BETWEEN 8 AND 19) AS booked_after_hours,
+       j._loaded_at AS _loaded_at
 FROM stg.jobs AS j
-LEFT JOIN er.identity_map AS m ON m.record_key = concat(j.tenant_id, '|jobs:', j.job_id);
+LEFT JOIN er.identity_map AS m ON m.record_key = concat(j.tenant_id, '|jobs:', j.job_id)
+LEFT JOIN raw.tenants AS t ON t.tenant_id = j.tenant_id;
 
 CREATE OR REPLACE TABLE marts.fct_leads ENGINE = MergeTree ORDER BY (tenant_id, lead_row_id) AS
 WITH ranked AS (
@@ -112,7 +115,16 @@ WITH r AS (
            r.phone_e164 AS phone_e164, r.email AS email, r.first_name AS first_name, r.last_name AS last_name,
            r.street_key AS street_key, r.zip5 AS zip5, r.seen_at AS seen_at
     FROM er.identity_map AS m INNER JOIN er.identity_records AS r ON r.record_key = m.record_key
-)
+),
+jobs AS (
+    -- Completed jobs per customer, and the most any one ServiceTitan customer id holds.
+    -- A repeat customer that the field service system splits across ids shows up here.
+    SELECT tenant_id, customer_key, sum(n) AS completed_jobs, max(n) AS max_jobs_one_st_id
+    FROM (SELECT tenant_id, customer_key, st_customer_id, count() AS n
+          FROM marts.fct_jobs WHERE status = 'Completed' GROUP BY tenant_id, customer_key, st_customer_id)
+    GROUP BY tenant_id, customer_key
+),
+agg AS (
 SELECT r.tenant_id AS tenant_id, r.customer_key AS customer_key,
        topKIf(1)(concat(initcap(first_name), ' ', initcap(ifNull(last_name, ''))),
                  length(first_name) > 1 AND last_name IS NOT NULL)[1] AS display_name,
@@ -126,4 +138,8 @@ SELECT r.tenant_id AS tenant_id, r.customer_key AS customer_key,
        count() AS record_count,
        min(seen_at) AS first_seen_at,
        max(seen_at) AS last_seen_at
-FROM r GROUP BY r.tenant_id, r.customer_key;
+FROM r GROUP BY r.tenant_id, r.customer_key
+)
+SELECT agg.*, toUInt64(ifNull(jobs.completed_jobs, 0)) AS completed_jobs,
+       toUInt64(ifNull(jobs.max_jobs_one_st_id, 0)) AS max_jobs_one_st_id
+FROM agg LEFT JOIN jobs ON jobs.tenant_id = agg.tenant_id AND jobs.customer_key = agg.customer_key;

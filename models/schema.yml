@@ -20,6 +20,8 @@ tables:
       primary_email: {description: Most common email, lower case.}
       sources: {description: Source systems this customer was seen in.}
       record_count: {description: Number of source records linked to this customer.}
+      completed_jobs: {description: Completed jobs for this resolved customer.}
+      max_jobs_one_st_id: {description: Most completed jobs held by any one ServiceTitan customer id of this customer. Lower than completed_jobs when the field service system split the customer.}
 
   marts.fct_leads:
     description: One row per unique API lead (partner retries removed) with speed to lead and booking outcome.
@@ -58,6 +60,7 @@ tables:
       status: {description: Scheduled, Completed or Canceled., tests: [not_null, {accepted_values: [Scheduled, Completed, Canceled]}]}
       booking_source: {description: Who booked the job. broccoli_ai_inbound, broccoli_ai_lead, csr or online_booking., tests: [{accepted_values: [broccoli_ai_inbound, broccoli_ai_lead, csr, online_booking]}]}
       total_revenue: {description: Job revenue in USD. Zero unless Completed.}
+      booked_after_hours: {description: True when the job was created before 8am or after 8pm in the contractor's local time.}
 
   marts.fct_invoices:
     description: Billing invoices for service and memberships, tied to the resolved customer.

@@ -73,19 +73,27 @@ def query(name: str, **kw) -> list[dict]:
     return q(compile_sql(name, **kw))
 
 
-def benchmark_sql() -> str:
+def benchmark_sql(peer_tenants: list[str] | None = None) -> str:
+    """Peer benchmarks across tenants. Aggregates only, no tenant_id column.
+    peer_tenants limits the peer group (for example one trade). A group smaller
+    than benchmark_min_tenants returns no rows at all."""
     parts = []
-    k = int(spec().get("benchmark_min_tenants", 3))
+    k = int(spec().get("benchmark_min_tenants", 5))
     band = int(spec().get("benchmark_min_tenants_for_band", 5))
+    for t in peer_tenants or []:
+        if not _SAFE.match(t):
+            raise ValueError(f"unsafe tenant id: {t!r}")
     for name, m in metrics().items():
         if not m.get("benchmark"):
             continue
         inner = compile_sql(name, by=["tenant_id"])
+        if peer_tenants is not None:
+            inner = f"SELECT * FROM ({inner}) WHERE tenant_id IN (" + ", ".join(f"'{t}'" for t in peer_tenants) + ")"
         parts.append(f"""SELECT '{name}' AS metric, count() AS n_tenants,
        avg(value) AS average,
-       if(count() >= {band}, quantileExact(0.25)(value), NULL) AS p25,
-       if(count() >= {band}, quantileExact(0.5)(value), NULL) AS median,
-       if(count() >= {band}, quantileExact(0.75)(value), NULL) AS p75
+       if(count() >= {band}, quantileExactInclusive(0.25)(value), NULL) AS p25,
+       if(count() >= {band}, quantileExactInclusive(0.5)(value), NULL) AS median,
+       if(count() >= {band}, quantileExactInclusive(0.75)(value), NULL) AS p75
 FROM ({inner}) HAVING n_tenants >= {k}""")
     return "\nUNION ALL\n".join(parts)
 

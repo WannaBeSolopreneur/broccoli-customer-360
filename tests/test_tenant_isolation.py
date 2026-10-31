@@ -48,14 +48,25 @@ def test_benchmarks_have_no_tenant_column(wh):
     assert cols == {"metric", "n_tenants", "average", "p25", "median", "p75"}
 
 
-def test_benchmark_bands_hidden_under_five_tenants(wh):
-    """With 3 tenants the median would be one tenant's exact value, so only the average shows."""
+def test_benchmarks_show_bands_with_ten_tenants(wh):
     rows = wh.q("SELECT * FROM benchmarks.metric_benchmarks")
-    assert rows, "benchmarks should show with 3 tenants"
+    assert rows, "benchmarks should show with 10 tenants"
     for r in rows:
-        assert int(r["n_tenants"]) == 3
-        assert r["p25"] is None and r["median"] is None and r["p75"] is None
-        assert r["average"] is not None
+        assert int(r["n_tenants"]) == len(TENANTS)
+        assert None not in (r["p25"], r["median"], r["p75"], r["average"])
+        assert float(r["p25"]) <= float(r["median"]) <= float(r["p75"])
+
+
+def test_small_peer_group_shows_nothing(wh):
+    """k-anonymity: a peer group of 4 tenants gives no benchmark at all. 5 is the minimum."""
+    assert wh.q(semantic.benchmark_sql(TENANTS[:4])) == []
+    five = wh.q(semantic.benchmark_sql(TENANTS[:5]))
+    assert five and all(int(r["n_tenants"]) == 5 for r in five)
+
+
+def test_peer_group_rejects_unsafe_tenant(wh):
+    with pytest.raises(ValueError):
+        semantic.benchmark_sql(["tnt_alpine", "x') OR ('1'='1"])
 
 
 def test_benchmark_average_is_not_any_single_tenant(wh):

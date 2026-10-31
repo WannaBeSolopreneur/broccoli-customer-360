@@ -2,8 +2,8 @@
 # Dashboards, benchmarks, reports and the ask tool all compile SQL from this file.
 # Change a definition here and every consumer changes with it.
 version: 1
-benchmark_min_tenants: 3            # below this, no benchmark at all. From 3, only the average of tenant values
-benchmark_min_tenants_for_band: 5   # median, p25 and p75 only with 5+ tenants. With fewer, a percentile is one tenant's exact value
+benchmark_min_tenants: 5            # k-anonymity. A peer group needs 5+ tenants, or no benchmark is shown at all
+benchmark_min_tenants_for_band: 5   # median, p25 and p75 also need 5+ tenants. With fewer, a percentile is one tenant's exact value
 dimensions:
   tenant_id: {sql: tenant_id, description: The contractor account. Always present for isolation.}
   month: {sql: "toStartOfMonth({time})", description: Calendar month of the metric time column (UTC).}
@@ -60,7 +60,7 @@ metrics:
     format: percent
     higher_is_better: true
     benchmark: true
-    synonyms: [answer rate, calls answered, missed calls, pick up rate]
+    synonyms: [answer rate, calls answered, pick up rate]
 
   - name: ai_call_booking_rate
     label: AI call booking rate
@@ -168,3 +168,52 @@ metrics:
     higher_is_better: false
     dimensions: [category, channel]
     synonyms: [ticket resolution, support time, how long to solve tickets, support response]
+
+  - name: missed_calls
+    label: Missed inbound calls
+    description: Inbound voice calls (spam excluded) that nobody answered, including callers who hung up first.
+    model: marts.fct_calls
+    time: started_at
+    type: count
+    filters: [direction = 'inbound', channel = 'voice', NOT is_spam, answered_by != 'ai_agent']
+    format: integer
+    higher_is_better: false
+    dimensions: [outcome]
+    synonyms: [missed calls, calls missed, unanswered calls, calls nobody answered]
+
+  - name: after_hours_booked_revenue
+    label: Revenue the AI booked after hours
+    description: Revenue of completed jobs the AI agent booked before 8am or after 8pm local time, when the office is closed.
+    model: marts.fct_jobs
+    time: created_on
+    type: sum
+    expr: toFloat64(total_revenue)
+    filters: [booked_by_broccoli, status = 'Completed', booked_after_hours]
+    format: currency
+    higher_is_better: true
+    dimensions: [booking_source, job_type]
+    synonyms: [after hours, after-hours, book after hours, booked after hours, office is closed, at night]
+
+  - name: repeat_customer_rate
+    label: Repeat customer rate
+    description: Share of resolved customers with a completed job who have two or more completed jobs.
+    model: marts.dim_customer
+    time: first_seen_at
+    type: ratio
+    numerator: countIf(completed_jobs >= 2)
+    denominator: countIf(completed_jobs >= 1)
+    format: percent
+    higher_is_better: true
+    benchmark: true
+    synonyms: [repeat customer rate, repeat rate, come back, returning customers]
+
+  - name: repeat_customers_found_by_matching
+    label: Repeat customers found only by matching
+    description: Resolved customers with two or more completed jobs where no single ServiceTitan customer id holds two of them. The field service system alone would not see them as repeat customers.
+    model: marts.dim_customer
+    time: first_seen_at
+    type: count
+    filters: [completed_jobs >= 2, max_jobs_one_st_id < 2]
+    format: integer
+    higher_is_better: true
+    synonyms: [found only by matching, hidden repeat customers, repeat customers we only find by matching]

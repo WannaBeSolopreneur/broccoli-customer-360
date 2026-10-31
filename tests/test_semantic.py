@@ -6,14 +6,15 @@ from c360 import semantic
 NAMES = list(semantic.metrics())
 
 
-def test_twelve_metrics_defined():
-    assert len(NAMES) == 12
+def test_sixteen_metrics_defined():
+    assert len(NAMES) == 16
 
 
 @pytest.mark.parametrize("name", NAMES)
 def test_metric_compiles_and_runs(wh, name):
+    from c360 import config
     rows = semantic.query(name, by=["tenant_id"])
-    assert len(rows) == 3
+    assert len(rows) == len(config.TENANTS)
     assert all(r["value"] is not None for r in rows)
 
 
@@ -43,3 +44,10 @@ def test_compiled_files_match_definitions(wh):
     for name in NAMES:
         on_disk = (config.SEMANTIC / "compiled" / f"{name}.sql").read_text().strip()
         assert on_disk == semantic.compile_sql(name, by=["tenant_id", "month"]).strip()
+
+
+def test_hidden_repeat_customers_are_repeat_customers(wh):
+    """Customers found only by matching are a subset of repeat customers."""
+    hidden = sum(int(r["value"]) for r in semantic.query("repeat_customers_found_by_matching", by=["tenant_id"]))
+    repeat = sum(int(r["numerator"]) for r in semantic.query("repeat_customer_rate", by=["tenant_id"]))
+    assert 0 < hidden < repeat
