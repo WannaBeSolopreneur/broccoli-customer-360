@@ -16,13 +16,14 @@ def _digest(root: Path) -> str:
 
 
 def test_same_seed_same_files(tmp_path):
-    generate.Gen().run(tmp_path / "a")
-    generate.Gen().run(tmp_path / "b")
+    # A small scale keeps this fast. Same seed and scale must give the same bytes.
+    generate.Gen(scale=0.05).run(tmp_path / "a")
+    generate.Gen(scale=0.05).run(tmp_path / "b")
     assert _digest(tmp_path / "a") == _digest(tmp_path / "b")
 
 
 def test_phones_and_emails_are_fake(tmp_path):
-    generate.Gen().run(tmp_path)
+    generate.Gen(scale=0.05).run(tmp_path)
     for line in (tmp_path / "raw" / "leads" / "tnt_alpine.jsonl").read_text().splitlines()[:300]:
         cust = json.loads(line)["payload"]["customer"]
         digits = "".join(c for c in cust["phone"] if c.isdigit())[-10:]
@@ -36,3 +37,10 @@ def test_phones_and_emails_are_fake(tmp_path):
 def test_marked_synthetic():
     tenants = json.loads((config.RAW / "tenants.json").read_text())
     assert all("(synthetic)" in t["name"] for t in tenants)
+
+
+def test_ten_tenants_and_twelve_months():
+    tenants = json.loads((config.RAW / "tenants.json").read_text())
+    assert len(tenants) == 10
+    assert len({t["trade"] for t in tenants}) == 4
+    assert config.WINDOW_START == "2025-10-01" and config.WINDOW_END == "2026-09-30"

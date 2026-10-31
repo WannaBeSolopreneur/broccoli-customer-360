@@ -1,4 +1,4 @@
-"""Generate synthetic, messy, multi-source data for three made-up contractors.
+"""Generate synthetic, messy, multi-source data for ten made-up contractors.
 
 Everything here is fake. Names, phones (555 exchange), emails (example.* domains)
 and addresses are random. The data is seeded, so every run gives the same files.
@@ -69,9 +69,16 @@ TRADE_SERVICES = {
     "Electrical": [("Panel upgrade", 3400, 0.35), ("EV charger install", 1650, 0.3), ("Outlet repair", 210, 0.4),
                    ("Lighting install", 640, 0.5), ("Whole home surge protector", 480, 0.2),
                    ("Generator install", 9200, 0.3), ("Breaker troubleshooting", 280, 0.5)],
+    "Roofing": [("Roof leak repair", 650, 0.5), ("Roof inspection", 149, 0.2), ("Shingle repair", 480, 0.4),
+                ("Full roof replacement", 14500, 0.3), ("Gutter install", 1800, 0.3),
+                ("Storm damage estimate", 0, 0.0), ("Skylight repair", 900, 0.4)],
 }
 LEAD_SOURCES = ["web-form", "google-lsa", "angi", "yelp", "meta-ads", "thumbtack"]
-MEMBERSHIP_PRICE = {"HVAC": 189.0, "Plumbing": 149.0, "Electrical": 129.0}
+LEAD_SOURCE_WEIGHTS = [0.22, 0.24, 0.16, 0.12, 0.16, 0.10]
+# Chance a connected lead books, by source. Made up so sources differ.
+LEAD_SOURCE_BOOK = {"web-form": 0.58, "google-lsa": 0.62, "angi": 0.42, "yelp": 0.47, "meta-ads": 0.36,
+                    "thumbtack": 0.44}
+MEMBERSHIP_PRICE = {"HVAC": 189.0, "Plumbing": 149.0, "Electrical": 129.0, "Roofing": 99.0}
 
 
 def _ts(dt: datetime) -> str:
@@ -79,8 +86,10 @@ def _ts(dt: datetime) -> str:
 
 
 class Gen:
-    def __init__(self, seed: int = config.SEED):
+    def __init__(self, seed: int = config.SEED, scale: float = 1.0):
+        """scale shrinks every tenant (tests use a small scale to stay fast)."""
         self.r = random.Random(seed)
+        self.scale = scale
         self.start = datetime.fromisoformat(config.WINDOW_START)
         self.end = datetime.fromisoformat(config.WINDOW_END) + timedelta(days=1)
         self.as_of = datetime.fromisoformat(config.AS_OF)
@@ -191,7 +200,7 @@ class Gen:
     def make_people(self, t: dict, donors: list[dict]) -> list[dict]:
         people: list[dict] = []
         used_emails: set[str] = set()
-        n = t["persons"]
+        n = max(50, int(t["persons"] * self.scale))
         while len(people) < n:
             pid = self.uid("p")
             if people and self.r.random() < 0.10:
@@ -200,9 +209,8 @@ class Gen:
                 first = self.r.choice([x for x in FIRST if x != host["first"]])
                 p = {"person_id": pid, "first": first, "last": host["last"], "cell": self.phone(t["area_codes"]),
                      "address": host["address"], "household": host["household"], "landline": host["landline"]}
-            elif donors and self.r.random() < 0.04:
+            elif donors and self.r.random() < 0.04 and (d := self.r.choice(donors)).get("email") not in used_emails:
                 # Same human is also a customer of another tenant. Keys must stay separate per tenant.
-                d = self.r.choice(donors)
                 p = {"person_id": pid, "first": d["first"], "last": d["last"], "cell": d["cell"],
                      "address": self.new_address(t), "household": self.uid("h"), "landline": None,
                      "email": d.get("email")}
@@ -250,7 +258,7 @@ class Gen:
 
     def caller_fmt(self, t: dict, digits: str) -> str:
         # Each tenant's phone carrier logs numbers a little differently.
-        style = {"tnt_alpine": "e164", "tnt_bayside": "plain10", "tnt_lonestar": "plain11"}[t["tenant_id"]]
+        style = t["phone_style"]
         if self.r.random() < 0.1:
             style = "e164"
         return self.fmt_phone(digits, style)
@@ -260,13 +268,14 @@ class Gen:
         services = TRADE_SERVICES[t["trade"]]
         st_ids: dict[str, list[str]] = {}
         used_job_numbers: set[str] = set()
-        after_hours_first_contact = tid == "tnt_alpine"
+        after_hours_first_contact = t["after_hours_ai"]
 
         def st_customer(p: dict) -> str:
+            # Office staff often make a second customer record for the same person.
             ids = st_ids.setdefault(p["person_id"], [])
-            if not ids or (len(ids) == 1 and self.r.random() < 0.05):
+            if not ids or (len(ids) == 1 and self.r.random() < 0.15):
                 ids.append(f"{self.r.randint(10_000_000, 99_999_999)}")
-            return ids[-1] if self.r.random() < 0.7 else ids[0]
+            return ids[-1] if self.r.random() < 0.6 else ids[0]
 
         def add_job(p: dict, created: datetime, source: str, ref: str | None):
             if created > self.as_of:
@@ -378,7 +387,7 @@ class Gen:
                 end = add_membership(p, start, renewal=False)
                 renew_on = end + timedelta(days=self.r.uniform(-20, 20))
                 if end <= self.as_of and renew_on <= self.as_of:
-                    if self.r.random() < (0.72 if tid != "tnt_lonestar" else 0.58):
+                    if self.r.random() < t["renewal"]:
                         add_membership(p, renew_on, renewal=True)
                         if self.r.random() < 0.3:
                             when = max(end - timedelta(days=self.r.uniform(1, 25)), self.start)
@@ -387,11 +396,12 @@ class Gen:
 
         for p in people:
             # Inbound calls to the AI agent.
-            for _ in range(self.r.choices([0, 1, 2, 3], [0.35, 0.4, 0.17, 0.08])[0]):
+            # Twelve months of history, so most people call more than once.
+            for _ in range(self.r.choices([0, 1, 2, 3, 4], [0.25, 0.35, 0.22, 0.12, 0.06])[0]):
                 when = self.in_window()
                 digits = p["landline"] if (p["landline"] and self.r.random() < 0.5) else p["cell"]
                 roll = self.r.random()
-                miss = {"tnt_alpine": 0.04, "tnt_bayside": 0.09, "tnt_lonestar": 0.06}[tid]
+                miss = t["miss_rate"]
                 if roll < miss:
                     call_row(p, when, "inbound", "voice", digits, "none", "missed", "unknown", False)
                     continue
@@ -403,7 +413,7 @@ class Gen:
                                         [0.45, 0.15, 0.15, 0.15, 0.10])[0]
                 book_p = {"repair": 0.62, "install": 0.4, "maintenance": 0.55, "estimate": 0.45,
                           "billing_question": 0.0}[intent]
-                booked = self.r.random() < book_p
+                booked = self.r.random() < min(0.95, book_p * t["booking_skill"])
                 outcome = "booked" if booked else self.r.choice(
                     ["quote_requested", "info_only", "transferred_to_staff", "callback_requested"])
                 name = ""
@@ -417,17 +427,17 @@ class Gen:
 
             # Leads sent through the API Leads webhook.
             n_leads = 0
-            if self.r.random() < 0.42:
-                n_leads = 2 if self.r.random() < 0.07 else 1
+            if self.r.random() < 0.45:
+                n_leads = 2 if self.r.random() < 0.12 else 1
             for _ in range(n_leads):
                 self.make_lead(t, p, add_job, call_row, after_hours_first_contact)
 
             # Work booked outside Broccoli (office staff or online booking).
-            if self.r.random() < 0.25:
+            for _ in range(self.r.choices([0, 1, 2], [0.68, 0.25, 0.07])[0]):
                 add_job(p, self.in_window(), self.r.choice(["csr", "online_booking"]), None)
 
             # Support tickets.
-            for _ in range(self.r.choices([0, 1, 2], [0.85, 0.12, 0.03])[0]):
+            for _ in range(self.r.choices([0, 1, 2], [0.80, 0.16, 0.04])[0]):
                 self.make_ticket(t, p)
 
         # Spam and robocalls. No real customer behind them.
@@ -439,7 +449,7 @@ class Gen:
     def make_lead(self, t, p, add_job, call_row, after_hours_first_contact):
         tid = t["tenant_id"]
         received = self.in_window()
-        source = self.r.choice(LEAD_SOURCES)
+        source = self.r.choices(LEAD_SOURCES, LEAD_SOURCE_WEIGHTS)[0]
         ext_id = f"{source}-{self.r.getrandbits(40):010x}"
         svc = self.r.choice(TRADE_SERVICES[t["trade"]])[0]
         f, l = self.name_variant(p["first"], p["last"])
@@ -495,7 +505,7 @@ class Gen:
                 call_row(p, when, "outbound", channel, p["cell"], "ai_agent", "no_answer" if channel == "voice" else "no_reply",
                          "lead_follow_up", False, lead_ref=ext_id, duration=self.r.randint(0, 30) if channel == "voice" else 0)
                 continue
-            booked = self.r.random() < 0.5
+            booked = self.r.random() < min(0.95, LEAD_SOURCE_BOOK[source] * t["booking_skill"])
             c = call_row(p, when, "outbound", channel, p["cell"], "ai_agent", "booked" if booked else "not_interested",
                          "lead_follow_up", booked, lead_ref=ext_id,
                          duration=self.r.randint(60, 500) if channel == "voice" else 0)
