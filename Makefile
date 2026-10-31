@@ -1,7 +1,7 @@
 # make all: generate data, build the warehouse, run checks and tests, write reports and charts.
 PY ?= .venv/bin/python
 
-.PHONY: setup generate build quality test report diagram ask all clean
+.PHONY: setup generate build quality test report diagram ask example all clean
 
 setup:
 	python3 -m venv .venv
@@ -28,7 +28,10 @@ diagram:
 ask:
 	$(PY) -m c360.ask
 
-all: generate build quality test report diagram
+example:
+	$(PY) -m c360.example
+
+all: generate build quality test report diagram example
 
 clean:
 	rm -rf data warehouse .pytest_cache

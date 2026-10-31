@@ -47,25 +47,27 @@ def lead_booking_compare() -> list[dict]:
 
 
 def chart_lead_booking(rows: list[dict], path):
+    """Horizontal bars, one group per tenant, so ten tenants stay readable."""
     names = {t["tenant_id"]: t["name"].split(" (")[0] for t in config.TENANTS}
-    fig, ax = plt.subplots(figsize=(12, 6.5), dpi=150)
-    width = 0.26
-    xs = range(len(rows))
-    series = [("by_lead_id_only", "Matched by lead id only", "#D6E4F2"),
+    rows = sorted(rows, key=lambda r: float(r["with_entity_resolution"]))
+    fig, ax = plt.subplots(figsize=(13, 11), dpi=150)
+    height = 0.27
+    ys = range(len(rows))
+    series = [("by_lead_id_only", "Lead id only", "#D6E4F2"),
               ("with_entity_resolution", "With entity resolution", BLUE),
               ("ground_truth", "Hidden ground truth", NAVY)]
     for i, (key, label, color) in enumerate(series):
         vals = [float(r[key]) * 100 for r in rows]
-        bars = ax.bar([x + (i - 1) * width for x in xs], vals, width, label=label, color=color, edgecolor=NAVY)
+        bars = ax.barh([y + (1 - i) * height for y in ys], vals, height, label=label, color=color, edgecolor=NAVY)
         for b, v in zip(bars, vals):
-            ax.text(b.get_x() + b.get_width() / 2, v + 0.8, f"{v:.0f}%", ha="center", fontsize=13, color=NAVY)
-    ax.set_xticks(list(xs))
-    ax.set_xticklabels([names[r["tenant_id"]] for r in rows])
-    ax.set_ylabel("% of leads booked within 14 days")
-    ax.set_ylim(0, max(float(r["ground_truth"]) for r in rows) * 100 + 22)
-    ax.set_title("Lead to booking rate (synthetic data)", fontsize=20, color=NAVY, pad=14)
+            ax.text(v + 0.6, b.get_y() + b.get_height() / 2, f"{v:.0f}%", va="center", fontsize=12, color=NAVY)
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([names[r["tenant_id"]] for r in rows], fontsize=14)
+    ax.set_xlabel("% of leads booked within 14 days")
+    ax.set_xlim(0, max(float(r["ground_truth"]) for r in rows) * 100 + 12)
+    ax.set_title("Lead to booking rate, 10 contractors (synthetic data)", fontsize=20, color=NAVY, pad=14)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.legend(frameon=False, loc="upper center", ncol=3, fontsize=13, bbox_to_anchor=(0.5, 1.0))
+    ax.legend(frameon=False, loc="lower right", fontsize=13)
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
