@@ -1,0 +1,121 @@
+{
+  "final": {
+    "precision": 0.9715,
+    "recall": 0.9892,
+    "f1": 0.9803,
+    "records": 22357,
+    "true_people": 5560,
+    "predicted_customers": 5708,
+    "people_fully_resolved_pct": 96.35,
+    "customers_mixing_people": 51,
+    "pairs": {
+      "true_positive": 49173,
+      "predicted": 50618,
+      "true": 49708
+    },
+    "cross_tenant_key_leaks": 0
+  },
+  "per_tenant": {
+    "tnt_alpine": {
+      "precision": 0.9688,
+      "recall": 0.9883,
+      "f1": 0.9784,
+      "records": 10216,
+      "true_people": 2510,
+      "predicted_customers": 2575,
+      "people_fully_resolved_pct": 96.41,
+      "customers_mixing_people": 23,
+      "pairs": {
+        "true_positive": 22586,
+        "predicted": 23314,
+        "true": 22853
+      }
+    },
+    "tnt_bayside": {
+      "precision": 0.9601,
+      "recall": 0.9879,
+      "f1": 0.9738,
+      "records": 6978,
+      "true_people": 1807,
+      "predicted_customers": 1855,
+      "people_fully_resolved_pct": 96.07,
+      "customers_mixing_people": 21,
+      "pairs": {
+        "true_positive": 14666,
+        "predicted": 15276,
+        "true": 14845
+      }
+    },
+    "tnt_lonestar": {
+      "precision": 0.9911,
+      "recall": 0.9926,
+      "f1": 0.9918,
+      "records": 5163,
+      "true_people": 1243,
+      "predicted_customers": 1278,
+      "people_fully_resolved_pct": 96.62,
+      "customers_mixing_people": 7,
+      "pairs": {
+        "true_positive": 11921,
+        "predicted": 12028,
+        "true": 12010
+      }
+    }
+  },
+  "ablation": [
+    {
+      "rules": "exact phone only",
+      "precision": 0.9932,
+      "recall": 0.8398,
+      "f1": 0.9101,
+      "predicted_customers": 7150
+    },
+    {
+      "rules": "phone + email",
+      "precision": 0.9807,
+      "recall": 0.9565,
+      "f1": 0.9684,
+      "predicted_customers": 6042
+    },
+    {
+      "rules": "+ system ids (ServiceTitan id, job number, lead id)",
+      "precision": 0.9788,
+      "recall": 0.981,
+      "f1": 0.9799,
+      "predicted_customers": 5814
+    },
+    {
+      "rules": "+ fuzzy name and address (full)",
+      "precision": 0.9715,
+      "recall": 0.9892,
+      "f1": 0.9803,
+      "predicted_customers": 5708
+    }
+  ],
+  "edges_by_rule": [
+    {
+      "rule": "email",
+      "edges": 7143
+    },
+    {
+      "rule": "external_lead_id",
+      "edges": 208
+    },
+    {
+      "rule": "fuzzy_name_address",
+      "edges": 22141
+    },
+    {
+      "rule": "invoice_job",
+      "edges": 4207
+    },
+    {
+      "rule": "phone",
+      "edges": 15207
+    },
+    {
+      "rule": "st_customer_id",
+      "edges": 1636
+    }
+  ]
+}

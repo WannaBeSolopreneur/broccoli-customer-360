@@ -1,0 +1,11 @@
+{
+  "providerId": "6f1c2a8e-1b7d-4c55-9a51-0a1e3c7d2b01",
+  "externalLeadId": "lead-123",
+  "customer": {"phone": "+18015551234", "firstName": "Jane", "lastName": "Doe", "email": "jane@example.com"},
+  "address": {"street": "123 Main St", "city": "Provo", "state": "UT", "postalCode": "84601"},
+  "serviceType": "Recurring home cleaning",
+  "description": "Wants a quote for biweekly service",
+  "source": "web-form",
+  "preferredChannel": "CALL_THEN_CHAT",
+  "additionalContext": {"home_size": "2,400 sq ft", "next_openings": "Tuesday morning, Thursday afternoon"}
+}

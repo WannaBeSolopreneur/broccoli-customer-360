@@ -1,0 +1,5 @@
+"""Shared chart colors. Powder blue boxes, navy text."""
+BLUE = "#A7C7E7"
+NAVY = "#1B2A41"
+LIGHT = "#E8F0F8"
+MID = "#5B84B1"

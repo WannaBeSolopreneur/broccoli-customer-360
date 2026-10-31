@@ -1,0 +1,90 @@
+# Table and column docs plus data tests. The build copies descriptions into
+# ClickHouse comments. c360/quality.py runs the tests and freshness checks.
+freshness:
+  # Checked per tenant. Hours since the newest _loaded_at, compared to the as of time.
+  raw.calls:    {loaded_at: _loaded_at, warn_after_hours: 2,  error_after_hours: 6}
+  raw.leads:    {loaded_at: _loaded_at, warn_after_hours: 2,  error_after_hours: 6}
+  raw.jobs:     {loaded_at: _loaded_at, warn_after_hours: 6,  error_after_hours: 24}
+  raw.invoices: {loaded_at: _loaded_at, warn_after_hours: 12, error_after_hours: 36}
+  raw.tickets:  {loaded_at: _loaded_at, warn_after_hours: 12, error_after_hours: 36}
+
+tables:
+  marts.dim_customer:
+    description: One row per resolved customer per tenant. Built by entity resolution across calls, leads, jobs, invoices and tickets.
+    unique: [[tenant_id, customer_key]]
+    columns:
+      tenant_id: {description: Contractor account. Every query must filter on it., tests: [not_null, {accepted_values: tenants}]}
+      customer_key: {description: Stable customer id inside one tenant. Never shared across tenants., tests: [not_null]}
+      display_name: {description: Most common full name seen for this customer.}
+      primary_phone: {description: Most common phone in E.164 format.}
+      primary_email: {description: Most common email, lower case.}
+      sources: {description: Source systems this customer was seen in.}
+      record_count: {description: Number of source records linked to this customer.}
+
+  marts.fct_leads:
+    description: One row per unique API lead (partner retries removed) with speed to lead and booking outcome.
+    unique: [[tenant_id, provider_id, external_lead_id]]
+    columns:
+      tenant_id: {description: Contractor account., tests: [not_null, {accepted_values: tenants}]}
+      external_lead_id: {description: Partner lead id from the API Leads payload., tests: [not_null]}
+      customer_key: {description: Resolved customer., tests: [not_null, {relationships: marts.dim_customer}]}
+      received_at: {description: When Broccoli received the first send of this lead (UTC)., tests: [not_null]}
+      duplicate_sends: {description: Extra sends of the same externalLeadId. Partner retries.}
+      speed_to_lead_sec: {description: Seconds from received_at to the first AI call or text.}
+      preferred_channel: {description: CALL, CHAT, CALL_THEN_CHAT or CONFIG_DEFAULT when not sent., tests: [{accepted_values: [CALL, CHAT, CALL_THEN_CHAT, CONFIG_DEFAULT]}]}
+      booked_within_14d: {description: True when the same resolved customer has a job created within 14 days of the lead.}
+      booked_by_ref_only: {description: True when a job carries this externalLeadId as its Broccoli reference. Shown to compare with entity resolution.}
+
+  marts.fct_calls:
+    description: AI agent calls and texts. Inbound calls link to customers by entity resolution. Outbound follow ups link through the lead.
+    unique: [[tenant_id, call_id]]
+    columns:
+      tenant_id: {description: Contractor account., tests: [not_null, {accepted_values: tenants}]}
+      call_id: {description: Call or text id., tests: [not_null]}
+      customer_key: {description: Resolved customer. Empty for spam calls., tests: [{relationships: marts.dim_customer}]}
+      direction: {description: inbound or outbound., tests: [not_null, {accepted_values: [inbound, outbound]}]}
+      channel: {description: voice or sms., tests: [{accepted_values: [voice, sms]}]}
+      answered_by: {description: ai_agent or none., tests: [{accepted_values: [ai_agent, none]}]}
+      outcome: {description: Call result such as booked, missed or spam.}
+      started_at: {description: Call start time (UTC)., tests: [not_null]}
+
+  marts.fct_jobs:
+    description: ServiceTitan style jobs with revenue, tied to the resolved customer.
+    unique: [[tenant_id, job_id]]
+    columns:
+      tenant_id: {description: Contractor account., tests: [not_null, {accepted_values: tenants}]}
+      job_id: {description: Job id., tests: [not_null]}
+      customer_key: {description: Resolved customer., tests: [not_null, {relationships: marts.dim_customer}]}
+      status: {description: Scheduled, Completed or Canceled., tests: [not_null, {accepted_values: [Scheduled, Completed, Canceled]}]}
+      booking_source: {description: Who booked the job. broccoli_ai_inbound, broccoli_ai_lead, csr or online_booking., tests: [{accepted_values: [broccoli_ai_inbound, broccoli_ai_lead, csr, online_booking]}]}
+      total_revenue: {description: Job revenue in USD. Zero unless Completed.}
+
+  marts.fct_invoices:
+    description: Billing invoices for service and memberships, tied to the resolved customer.
+    unique: [[tenant_id, invoice_id]]
+    columns:
+      tenant_id: {description: Contractor account., tests: [not_null, {accepted_values: tenants}]}
+      invoice_id: {description: Invoice id., tests: [not_null]}
+      customer_key: {description: Resolved customer., tests: [not_null, {relationships: marts.dim_customer}]}
+      invoice_type: {description: service or membership., tests: [{accepted_values: [service, membership]}]}
+      amount: {description: Invoice amount in USD.}
+      amount_paid: {description: Amount paid so far in USD.}
+
+  marts.fct_tickets:
+    description: Support tickets tied to the resolved customer.
+    unique: [[tenant_id, ticket_id]]
+    columns:
+      tenant_id: {description: Contractor account., tests: [not_null, {accepted_values: tenants}]}
+      ticket_id: {description: Ticket id., tests: [not_null]}
+      customer_key: {description: Resolved customer., tests: [not_null, {relationships: marts.dim_customer}]}
+      resolution_hours: {description: Hours from open to solved.}
+
+  marts.fct_memberships:
+    description: Membership periods from billing, with a renewed flag based on the resolved customer.
+    unique: [[tenant_id, membership_id]]
+    columns:
+      tenant_id: {description: Contractor account., tests: [not_null]}
+      membership_id: {description: Membership id from billing. Renewals get a new id., tests: [not_null]}
+      customer_key: {description: Resolved customer., tests: [not_null, {relationships: marts.dim_customer}]}
+      renewal_due: {description: True when the period ended on or before the as of date.}
+      renewed: {description: True when the same customer started a new membership within 45 days of this one ending.}

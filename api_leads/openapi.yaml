@@ -1,0 +1,144 @@
+# OpenAPI 3.1 description of Broccoli's API Leads webhook.
+# Written by hand, strictly from the public page
+#   https://docs.broccoli.com/api-leads/specification  (read on 2026-10-31)
+# and the "Send a test request" page in https://docs.broccoli.com/llms-full.txt.
+# This is an unofficial, offline reading aid. Where the page is silent, this
+# file is silent too. Nothing here was tested against the live API.
+openapi: 3.1.0
+info:
+  title: Broccoli API Leads (unofficial description from public docs)
+  version: "2026-10-31"
+  description: >
+    An authenticated webhook that lets a partner system push a lead into Broccoli.
+    Validation is strict at every level. A field that is not listed fails the
+    whole request with a 400.
+externalDocs:
+  url: https://docs.broccoli.com/api-leads/specification
+servers:
+  - url: https://api.broccoli.com
+security:
+  - bearerAuth: []
+paths:
+  /leads/inbound/webhook:
+    post:
+      summary: Send a lead
+      operationId: sendLead
+      parameters:
+        - name: test
+          in: query
+          required: false
+          description: Set to true for test mode. Broccoli checks the key and the full payload, stores nothing and contacts nobody.
+          schema: {type: boolean}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/LeadRequest"}
+            example:
+              providerId: "<provider-id>"
+              externalLeadId: lead-123
+              customer: {phone: "+18015551234", firstName: Jane, lastName: Doe, email: jane@example.com}
+              address: {street: 123 Main St, city: Provo, state: UT, postalCode: "84601"}
+              serviceType: Recurring home cleaning
+              description: Wants a quote for biweekly service
+              source: web-form
+              preferredChannel: CALL_THEN_CHAT
+              additionalContext: {home_size: "2,400 sq ft", next_openings: "Tuesday morning, Thursday afternoon"}
+      responses:
+        "200":
+          description: Accepted (or validated in test mode).
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/LeadResponse"}
+              examples:
+                started: {value: {success: true, leadId: 022245a8-0000-0000-0000-000000000000, status: STARTED, deduped: false}}
+                test: {value: {success: true, leadId: null, status: TEST, deduped: false}}
+        "400": {description: The payload failed validation. Do not retry. Fix the request.}
+        "401": {description: The API key is missing or unknown. Do not retry.}
+        "403": {description: The key does not match the providerId, or the configuration is paused. Do not retry.}
+        "404": {description: The providerId does not exist. Do not retry.}
+        "500": {description: An error on Broccoli's side. Retry with backoff and resend the same externalLeadId.}
+  /leads/inbound/webhook/verify:
+    post:
+      summary: Check that a key and Provider ID belong together
+      operationId: verifyKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {providerId: {type: string}}
+              required: [providerId]
+      responses:
+        "200":
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid: {type: boolean}
+                  providerId: {type: string}
+                  provider: {type: string}
+                  orgName: {type: string}
+                  externalAccountId: {type: [string, "null"]}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: "Authorization: Bearer bro_live_<key>. Each key works only with its own Provider ID."
+  schemas:
+    LeadRequest:
+      type: object
+      additionalProperties: false
+      required: [providerId, customer]
+      properties:
+        providerId: {type: string, format: uuid, description: The Provider ID of the configuration, a UUID.}
+        customer: {$ref: "#/components/schemas/Customer"}
+        externalLeadId: {type: string, description: Your ID for the lead. Sending the same ID again does not create a second lead.}
+        address:
+          description: The service address as one string. An object is also accepted.
+          oneOf:
+            - {type: string}
+            - {$ref: "#/components/schemas/AddressObject"}
+        serviceType: {type: string}
+        description: {type: string}
+        source: {type: string}
+        preferredChannel: {type: string, enum: [CALL, CHAT, CALL_THEN_CHAT]}
+        additionalContext:
+          type: object
+          description: A flat object of string keys and string values. Nested objects, numbers and booleans are rejected.
+          additionalProperties: {type: string}
+        greetingPhrase: {type: string, maxLength: 300}
+    Customer:
+      type: object
+      additionalProperties: false
+      required: [phone]
+      properties:
+        phone:
+          type: string
+          description: E.164 preferred. US and Canadian numbers are also accepted as 10 digits, or 11 digits starting with 1.
+          pattern: "^(\\+[1-9][0-9]{1,14}|[0-9]{10}|1[0-9]{10})$"
+        name: {type: string, description: Full name.}
+        firstName: {type: string, description: Used with lastName when name is not sent.}
+        lastName: {type: string, description: Used with firstName when name is not sent.}
+        email: {type: string, format: email}
+    AddressObject:
+      type: object
+      additionalProperties: false
+      required: [street, city, state, postalCode]
+      properties:
+        street: {type: string}
+        city: {type: string}
+        state: {type: string}
+        postalCode: {type: string}
+        country: {type: string, default: US}
+    LeadResponse:
+      type: object
+      properties:
+        success: {type: boolean}
+        leadId: {type: [string, "null"]}
+        status: {type: string, enum: [STARTED, TEST]}
+        deduped: {type: boolean}

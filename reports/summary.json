@@ -1,0 +1,371 @@
+{
+  "entity_resolution": {
+    "precision": 0.9715,
+    "recall": 0.9892,
+    "f1": 0.9803,
+    "records": 22357,
+    "true_people": 5560,
+    "predicted_customers": 5708,
+    "people_fully_resolved_pct": 96.35,
+    "customers_mixing_people": 51,
+    "pairs": {
+      "true_positive": 49173,
+      "predicted": 50618,
+      "true": 49708
+    },
+    "cross_tenant_key_leaks": 0
+  },
+  "ablation": [
+    {
+      "rules": "exact phone only",
+      "precision": 0.9932,
+      "recall": 0.8398,
+      "f1": 0.9101,
+      "predicted_customers": 7150
+    },
+    {
+      "rules": "phone + email",
+      "precision": 0.9807,
+      "recall": 0.9565,
+      "f1": 0.9684,
+      "predicted_customers": 6042
+    },
+    {
+      "rules": "+ system ids (ServiceTitan id, job number, lead id)",
+      "precision": 0.9788,
+      "recall": 0.981,
+      "f1": 0.9799,
+      "predicted_customers": 5814
+    },
+    {
+      "rules": "+ fuzzy name and address (full)",
+      "precision": 0.9715,
+      "recall": 0.9892,
+      "f1": 0.9803,
+      "predicted_customers": 5708
+    }
+  ],
+  "quality": {
+    "checked_at": "2026-10-31 15:25:08",
+    "as_of": "2026-10-01 06:00:00",
+    "total": 74,
+    "passed": 74,
+    "warnings": 0,
+    "errors": 0
+  },
+  "lead_booking_compare": [
+    {
+      "tenant_id": "tnt_alpine",
+      "leads": 1288,
+      "by_lead_id_only": 0.2578,
+      "with_entity_resolution": 0.4697,
+      "ground_truth": 0.4697
+    },
+    {
+      "tenant_id": "tnt_bayside",
+      "leads": 906,
+      "by_lead_id_only": 0.2528,
+      "with_entity_resolution": 0.4525,
+      "ground_truth": 0.4525
+    },
+    {
+      "tenant_id": "tnt_lonestar",
+      "leads": 617,
+      "by_lead_id_only": 0.2609,
+      "with_entity_resolution": 0.4538,
+      "ground_truth": 0.4538
+    }
+  ],
+  "metrics_by_tenant": {
+    "leads_received": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 1288,
+        "rows_used": 1288
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 906,
+        "rows_used": 906
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 617,
+        "rows_used": 617
+      }
+    ],
+    "speed_to_lead_median_sec": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 27,
+        "rows_used": 1288
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 858,
+        "rows_used": 906
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 811,
+        "rows_used": 617
+      }
+    ],
+    "lead_to_booking_rate": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 0.4697204968944099,
+        "numerator": 605,
+        "denominator": 1288,
+        "rows_used": 1288
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 0.45253863134657835,
+        "numerator": 410,
+        "denominator": 906,
+        "rows_used": 906
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 0.4538087520259319,
+        "numerator": 280,
+        "denominator": 617,
+        "rows_used": 617
+      }
+    ],
+    "call_answer_rate": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 0.9441997063142438,
+        "numerator": 2572,
+        "denominator": 2724,
+        "rows_used": 2724
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 0.8792319353208691,
+        "numerator": 1740,
+        "denominator": 1979,
+        "rows_used": 1979
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 0.9147180192572214,
+        "numerator": 1330,
+        "denominator": 1454,
+        "rows_used": 1454
+      }
+    ],
+    "ai_call_booking_rate": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 0.4832814930015552,
+        "numerator": 1243,
+        "denominator": 2572,
+        "rows_used": 2572
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 0.4810344827586207,
+        "numerator": 837,
+        "denominator": 1740,
+        "rows_used": 1740
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 0.48270676691729325,
+        "numerator": 642,
+        "denominator": 1330,
+        "rows_used": 1330
+      }
+    ],
+    "booked_revenue": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 4393346.09999999,
+        "rows_used": 1541
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 688545.4000000001,
+        "rows_used": 1060
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 1880102.3399999985,
+        "rows_used": 769
+      }
+    ],
+    "completed_revenue": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 6071473.459999997,
+        "rows_used": 2163
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 945298.7699999993,
+        "rows_used": 1474
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 2647994.1700000023,
+        "rows_used": 1072
+      }
+    ],
+    "active_customers": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 1562,
+        "rows_used": 2163
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 1078,
+        "rows_used": 1474
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 764,
+        "rows_used": 1072
+      }
+    ],
+    "revenue_per_customer": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 3886.9868501920596,
+        "numerator": 6071473.459999997,
+        "denominator": 1562,
+        "rows_used": 2163
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 876.9005287569566,
+        "numerator": 945298.7699999993,
+        "denominator": 1078,
+        "rows_used": 1474
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 3465.960955497385,
+        "numerator": 2647994.1700000023,
+        "denominator": 764,
+        "rows_used": 1072
+      }
+    ],
+    "membership_renewal_rate": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 0.7226027397260274,
+        "numerator": 211,
+        "denominator": 292,
+        "rows_used": 292
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 0.6972477064220184,
+        "numerator": 152,
+        "denominator": 218,
+        "rows_used": 218
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 0.5460526315789473,
+        "numerator": 83,
+        "denominator": 152,
+        "rows_used": 152
+      }
+    ],
+    "invoice_collection_rate": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 0.8846603844077903,
+        "numerator": 5526521.600000006,
+        "denominator": 6247054.4600000065,
+        "rows_used": 3092
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 0.8717508174026101,
+        "numerator": 912650.5499999996,
+        "denominator": 1046916.7699999992,
+        "rows_used": 1975
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 0.8926460398335508,
+        "numerator": 2416230.52,
+        "denominator": 2706818.170000001,
+        "rows_used": 1528
+      }
+    ],
+    "ticket_resolution_median_hours": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 15.4,
+        "rows_used": 481
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 13.6,
+        "rows_used": 355
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 16.166666666666668,
+        "rows_used": 247
+      }
+    ]
+  },
+  "benchmarks": [
+    {
+      "metric": "ai_call_booking_rate",
+      "n_tenants": 3,
+      "average": 0.4823409142258231,
+      "p25": null,
+      "median": null,
+      "p75": null
+    },
+    {
+      "metric": "call_answer_rate",
+      "n_tenants": 3,
+      "average": 0.9127165536307781,
+      "p25": null,
+      "median": null,
+      "p75": null
+    },
+    {
+      "metric": "lead_to_booking_rate",
+      "n_tenants": 3,
+      "average": 0.45868929342230674,
+      "p25": null,
+      "median": null,
+      "p75": null
+    },
+    {
+      "metric": "membership_renewal_rate",
+      "n_tenants": 3,
+      "average": 0.6553010259089976,
+      "p25": null,
+      "median": null,
+      "p75": null
+    },
+    {
+      "metric": "revenue_per_customer",
+      "n_tenants": 3,
+      "average": 2743.2827781488,
+      "p25": null,
+      "median": null,
+      "p75": null
+    },
+    {
+      "metric": "speed_to_lead_median_sec",
+      "n_tenants": 3,
+      "average": 565.3333333333334,
+      "p25": null,
+      "median": null,
+      "p75": null
+    }
+  ]
+}

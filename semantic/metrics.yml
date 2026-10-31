@@ -1,0 +1,170 @@
+# One place for every metric definition.
+# Dashboards, benchmarks, reports and the ask tool all compile SQL from this file.
+# Change a definition here and every consumer changes with it.
+version: 1
+benchmark_min_tenants: 3            # below this, no benchmark at all. From 3, only the average of tenant values
+benchmark_min_tenants_for_band: 5   # median, p25 and p75 only with 5+ tenants. With fewer, a percentile is one tenant's exact value
+dimensions:
+  tenant_id: {sql: tenant_id, description: The contractor account. Always present for isolation.}
+  month: {sql: "toStartOfMonth({time})", description: Calendar month of the metric time column (UTC).}
+
+metrics:
+  - name: leads_received
+    label: Leads received
+    description: Unique leads received through API Leads. Partner retries with the same externalLeadId count once.
+    model: marts.fct_leads
+    time: received_at
+    type: count
+    format: integer
+    higher_is_better: true
+    dimensions: [lead_source, preferred_channel]
+    synonyms: [leads, new leads, how many leads, lead volume, lead count]
+
+  - name: speed_to_lead_median_sec
+    label: Speed to lead (median seconds)
+    description: Median seconds from a lead arriving to the AI agent's first call or text.
+    model: marts.fct_leads
+    time: received_at
+    type: median
+    expr: speed_to_lead_sec
+    filters: [first_contact_at IS NOT NULL]
+    format: seconds
+    higher_is_better: false
+    benchmark: true
+    dimensions: [lead_source, received_in_hours]
+    synonyms: [speed to lead, response time, how fast, first contact, time to contact, reply to leads]
+
+  - name: lead_to_booking_rate
+    label: Lead to booking rate
+    description: Share of unique leads where the same resolved customer has a job booked within 14 days of the lead.
+    model: marts.fct_leads
+    time: received_at
+    type: ratio
+    numerator: countIf(booked_within_14d)
+    denominator: count()
+    format: percent
+    higher_is_better: true
+    benchmark: true
+    dimensions: [lead_source, preferred_channel]
+    synonyms: [lead conversion, conversion rate, leads booked, booking rate for leads, lead to job]
+
+  - name: call_answer_rate
+    label: Call answer rate
+    description: Share of inbound voice calls (spam excluded) answered by the AI agent.
+    model: marts.fct_calls
+    time: started_at
+    type: ratio
+    numerator: countIf(answered_by = 'ai_agent')
+    denominator: count()
+    filters: [direction = 'inbound', channel = 'voice', NOT is_spam]
+    format: percent
+    higher_is_better: true
+    benchmark: true
+    synonyms: [answer rate, calls answered, missed calls, pick up rate]
+
+  - name: ai_call_booking_rate
+    label: AI call booking rate
+    description: Share of inbound calls answered by the AI agent that ended with a booked job.
+    model: marts.fct_calls
+    time: started_at
+    type: ratio
+    numerator: countIf(booked)
+    denominator: count()
+    filters: [direction = 'inbound', answered_by = 'ai_agent', NOT is_spam]
+    format: percent
+    higher_is_better: true
+    benchmark: true
+    dimensions: [intent]
+    synonyms: [call booking rate, calls booked, call conversion, booking rate on calls]
+
+  - name: booked_revenue
+    label: Booked revenue from Broccoli
+    description: Revenue of completed jobs that the AI agent booked (inbound calls or lead follow up).
+    model: marts.fct_jobs
+    time: created_on
+    type: sum
+    expr: toFloat64(total_revenue)
+    filters: [booked_by_broccoli, status = 'Completed']
+    format: currency
+    higher_is_better: true
+    dimensions: [booking_source, job_type]
+    synonyms: [revenue, booked revenue, money from broccoli, sales from ai, revenue booked]
+
+  - name: completed_revenue
+    label: Completed job revenue (all sources)
+    description: Revenue of all completed jobs, booked by any channel.
+    model: marts.fct_jobs
+    time: created_on
+    type: sum
+    expr: toFloat64(total_revenue)
+    filters: [status = 'Completed']
+    format: currency
+    higher_is_better: true
+    dimensions: [booking_source, job_type]
+    synonyms: [total revenue, all revenue, job revenue]
+
+  - name: active_customers
+    label: Active customers
+    description: Distinct resolved customers with at least one completed job.
+    model: marts.fct_jobs
+    time: created_on
+    type: count_distinct
+    expr: customer_key
+    filters: [status = 'Completed']
+    format: integer
+    higher_is_better: true
+    synonyms: [customers, how many customers, active customers, unique customers]
+
+  - name: revenue_per_customer
+    label: Revenue per active customer
+    description: Completed job revenue divided by distinct resolved customers with a completed job.
+    model: marts.fct_jobs
+    time: created_on
+    type: ratio
+    numerator: sum(toFloat64(total_revenue))
+    denominator: uniqExact(customer_key)
+    filters: [status = 'Completed']
+    format: currency
+    higher_is_better: true
+    benchmark: true
+    synonyms: [revenue per customer, average customer value, spend per customer]
+
+  - name: membership_renewal_rate
+    label: Membership renewal rate
+    description: Share of memberships that ended on or before the as of date and were renewed by the same customer within 45 days.
+    model: marts.fct_memberships
+    time: period_end
+    type: ratio
+    numerator: countIf(renewed)
+    denominator: count()
+    filters: [renewal_due]
+    format: percent
+    higher_is_better: true
+    benchmark: true
+    synonyms: [renewal rate, membership renewals, memberships renewed, retention of members, churn]
+
+  - name: invoice_collection_rate
+    label: Invoice collection rate
+    description: Amount paid divided by amount invoiced.
+    model: marts.fct_invoices
+    time: invoice_date
+    type: ratio
+    numerator: sum(toFloat64(amount_paid))
+    denominator: sum(toFloat64(amount))
+    format: percent
+    higher_is_better: true
+    dimensions: [invoice_type]
+    synonyms: [collection rate, paid invoices, money collected, unpaid invoices]
+
+  - name: ticket_resolution_median_hours
+    label: Support resolution time (median hours)
+    description: Median hours from a support ticket opening to being solved.
+    model: marts.fct_tickets
+    time: created_at
+    type: median
+    expr: resolution_hours
+    filters: [resolution_hours IS NOT NULL]
+    format: hours
+    higher_is_better: false
+    dimensions: [category, channel]
+    synonyms: [ticket resolution, support time, how long to solve tickets, support response]

@@ -1,0 +1,38 @@
+{
+  "timings_sec": {
+    "functions": 0.022,
+    "raw": 0.136,
+    "staging": 0.104,
+    "identity_records": 0.083,
+    "entity_resolution": 0.59,
+    "marts": 0.356,
+    "tenant_api": 0.016,
+    "semantic": 0.075,
+    "docs": 0.151,
+    "total": 1.563
+  },
+  "row_counts": {
+    "raw.calls": 13244,
+    "raw.leads": 3019,
+    "raw.jobs": 5501,
+    "raw.invoices": 6595,
+    "raw.tickets": 1085,
+    "er.identity_records": 22357,
+    "er.edges": 50542,
+    "marts.dim_customer": 5708,
+    "marts.fct_calls": 13244,
+    "marts.fct_leads": 2811,
+    "marts.fct_jobs": 5501,
+    "marts.fct_invoices": 6595,
+    "marts.fct_tickets": 1085,
+    "marts.fct_memberships": 2067
+  },
+  "entity_resolution": {
+    "clusters": 5708,
+    "reused_keys": 5708,
+    "new_keys": 0,
+    "merged_keys": 0,
+    "rounds": 7
+  },
+  "metric_views": 12
+}
