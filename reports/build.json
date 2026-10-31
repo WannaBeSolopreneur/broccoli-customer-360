@@ -1,38 +1,38 @@
 {
   "timings_sec": {
-    "functions": 0.022,
-    "raw": 0.136,
-    "staging": 0.104,
-    "identity_records": 0.083,
-    "entity_resolution": 0.59,
-    "marts": 0.356,
-    "tenant_api": 0.016,
-    "semantic": 0.075,
-    "docs": 0.151,
-    "total": 1.563
+    "functions": 0.015,
+    "raw": 0.642,
+    "staging": 0.812,
+    "identity_records": 0.332,
+    "entity_resolution": 3.49,
+    "marts": 1.224,
+    "tenant_api": 0.009,
+    "semantic": 0.076,
+    "docs": 0.162,
+    "total": 6.846
   },
   "row_counts": {
-    "raw.calls": 13244,
-    "raw.leads": 3019,
-    "raw.jobs": 5501,
-    "raw.invoices": 6595,
-    "raw.tickets": 1085,
-    "er.identity_records": 22357,
-    "er.edges": 50542,
-    "marts.dim_customer": 5708,
-    "marts.fct_calls": 13244,
-    "marts.fct_leads": 2811,
-    "marts.fct_jobs": 5501,
-    "marts.fct_invoices": 6595,
-    "marts.fct_tickets": 1085,
-    "marts.fct_memberships": 2067
+    "raw.calls": 135092,
+    "raw.leads": 27142,
+    "raw.jobs": 59771,
+    "raw.invoices": 70813,
+    "raw.tickets": 11800,
+    "er.identity_records": 241554,
+    "er.edges": 632100,
+    "marts.dim_customer": 48567,
+    "marts.fct_calls": 135092,
+    "marts.fct_leads": 25130,
+    "marts.fct_jobs": 59771,
+    "marts.fct_invoices": 70813,
+    "marts.fct_tickets": 11800,
+    "marts.fct_memberships": 21336
   },
   "entity_resolution": {
-    "clusters": 5708,
-    "reused_keys": 5708,
+    "clusters": 48567,
+    "reused_keys": 48567,
     "new_keys": 0,
     "merged_keys": 0,
     "rounds": 7
   },
-  "metric_views": 12
+  "metric_views": 16
 }

@@ -1,9 +1,9 @@
 {
   "summary": {
-    "checked_at": "2026-10-31 15:25:08",
+    "checked_at": "2026-10-31 15:46:17",
     "as_of": "2026-10-01 06:00:00",
-    "total": 74,
-    "passed": 74,
+    "total": 109,
+    "passed": 109,
     "warnings": 0,
     "errors": 0
   },
@@ -372,7 +372,70 @@
     {
       "check": "freshness",
       "table": "raw.calls",
+      "tenant_id": "tnt_desert",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
+      "tenant_id": "tnt_gulf",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
+      "tenant_id": "tnt_harbor",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
+      "tenant_id": "tnt_lakeshore",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
       "tenant_id": "tnt_lonestar",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
+      "tenant_id": "tnt_peachtree",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
+      "tenant_id": "tnt_summit",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.calls",
+      "tenant_id": "tnt_twincities",
       "hours_since_load": 0.02,
       "status": "pass",
       "severity": "error",
@@ -399,7 +462,70 @@
     {
       "check": "freshness",
       "table": "raw.leads",
+      "tenant_id": "tnt_desert",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
+      "tenant_id": "tnt_gulf",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
+      "tenant_id": "tnt_harbor",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
+      "tenant_id": "tnt_lakeshore",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
       "tenant_id": "tnt_lonestar",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
+      "tenant_id": "tnt_peachtree",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
+      "tenant_id": "tnt_summit",
+      "hours_since_load": 0.02,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.leads",
+      "tenant_id": "tnt_twincities",
       "hours_since_load": 0.02,
       "status": "pass",
       "severity": "error",
@@ -426,7 +552,70 @@
     {
       "check": "freshness",
       "table": "raw.jobs",
+      "tenant_id": "tnt_desert",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
+      "tenant_id": "tnt_gulf",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
+      "tenant_id": "tnt_harbor",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
+      "tenant_id": "tnt_lakeshore",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
       "tenant_id": "tnt_lonestar",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
+      "tenant_id": "tnt_peachtree",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
+      "tenant_id": "tnt_summit",
+      "hours_since_load": 0.08,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.jobs",
+      "tenant_id": "tnt_twincities",
       "hours_since_load": 0.08,
       "status": "pass",
       "severity": "error",
@@ -453,7 +642,70 @@
     {
       "check": "freshness",
       "table": "raw.invoices",
+      "tenant_id": "tnt_desert",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
+      "tenant_id": "tnt_gulf",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
+      "tenant_id": "tnt_harbor",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
+      "tenant_id": "tnt_lakeshore",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
       "tenant_id": "tnt_lonestar",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
+      "tenant_id": "tnt_peachtree",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
+      "tenant_id": "tnt_summit",
+      "hours_since_load": 0.5,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.invoices",
+      "tenant_id": "tnt_twincities",
       "hours_since_load": 0.5,
       "status": "pass",
       "severity": "error",
@@ -480,7 +732,70 @@
     {
       "check": "freshness",
       "table": "raw.tickets",
+      "tenant_id": "tnt_desert",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
+      "tenant_id": "tnt_gulf",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
+      "tenant_id": "tnt_harbor",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
+      "tenant_id": "tnt_lakeshore",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
       "tenant_id": "tnt_lonestar",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
+      "tenant_id": "tnt_peachtree",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
+      "tenant_id": "tnt_summit",
+      "hours_since_load": 0.17,
+      "status": "pass",
+      "severity": "error",
+      "failures": 0
+    },
+    {
+      "check": "freshness",
+      "table": "raw.tickets",
+      "tenant_id": "tnt_twincities",
       "hours_since_load": 0.17,
       "status": "pass",
       "severity": "error",

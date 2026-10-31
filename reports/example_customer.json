@@ -1,0 +1,95 @@
+{
+  "customer_key": "cus_04d990adb36f2c8b",
+  "records": [
+    {
+      "source": "calls",
+      "name": "",
+      "phone": "+13035555904",
+      "email": "",
+      "street": ""
+    },
+    {
+      "source": "calls",
+      "name": "",
+      "phone": "+13035555904",
+      "email": "",
+      "street": ""
+    },
+    {
+      "source": "invoices",
+      "name": "Dona Silva",
+      "phone": "+1 303 555 5904",
+      "email": "donna_silva@inbox.example.net",
+      "street": "13551 Pine Ln"
+    },
+    {
+      "source": "invoices",
+      "name": "Donna Silva",
+      "phone": "303.555.5904",
+      "email": "Donna_silva@inbox.example.net",
+      "street": "13551 PINE LANE"
+    },
+    {
+      "source": "invoices",
+      "name": "D. Silva",
+      "phone": "303.555.5904",
+      "email": "DONNA_SILVA@INBOX.EXAMPLE.NET",
+      "street": "13551 Pine Lane"
+    },
+    {
+      "source": "invoices",
+      "name": "Donna Silva",
+      "phone": "303.555.5904",
+      "email": "Donna_silva@inbox.example.net",
+      "street": "13551 Pien Lane"
+    },
+    {
+      "source": "jobs",
+      "name": "Silva, Donna",
+      "phone": "(303) 555-5904",
+      "email": "donna_silva@inbox.example.net",
+      "street": "13551 Pine Ln"
+    },
+    {
+      "source": "jobs",
+      "name": "donna silva",
+      "phone": "(303) 555-5904",
+      "email": "donna_silva@inbox.example.net",
+      "street": "13551 Pine Lane"
+    },
+    {
+      "source": "leads",
+      "name": "Donnna Silva",
+      "phone": "+13035555904",
+      "email": "Donna_silva@inbox.example.net",
+      "street": "13551 Pine Ln"
+    },
+    {
+      "source": "leads",
+      "name": "Donna Silva",
+      "phone": "+13035555904",
+      "email": "donna_silva@inbox.example.net",
+      "street": "13551 Pine Ln"
+    },
+    {
+      "source": "leads",
+      "name": "Donnna Silva",
+      "phone": "+13035555904",
+      "email": "Donna_silva@inbox.example.net",
+      "street": "13551 Pine Ln"
+    },
+    {
+      "source": "tickets",
+      "name": "Donna Silva",
+      "phone": "1-303-555-5904",
+      "email": "donna_silva@inbox.example.net",
+      "street": ""
+    }
+  ],
+  "dim_customer": {
+    "display_name": "Donna Silva",
+    "primary_phone": "+13035555904",
+    "primary_email": "donna_silva@inbox.example.net",
+    "street_key": "13551 pine ln"
+  }
+}

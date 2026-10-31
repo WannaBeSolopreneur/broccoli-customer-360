@@ -1,121 +1,226 @@
 {
   "final": {
-    "precision": 0.9715,
-    "recall": 0.9892,
-    "f1": 0.9803,
-    "records": 22357,
-    "true_people": 5560,
-    "predicted_customers": 5708,
-    "people_fully_resolved_pct": 96.35,
-    "customers_mixing_people": 51,
+    "precision": 0.9798,
+    "recall": 0.9903,
+    "f1": 0.985,
+    "records": 241554,
+    "true_people": 47033,
+    "predicted_customers": 48567,
+    "people_fully_resolved_pct": 95.81,
+    "customers_mixing_people": 442,
     "pairs": {
-      "true_positive": 49173,
-      "predicted": 50618,
-      "true": 49708
+      "true_positive": 704696,
+      "predicted": 719195,
+      "true": 711616
     },
     "cross_tenant_key_leaks": 0
   },
   "per_tenant": {
     "tnt_alpine": {
-      "precision": 0.9688,
-      "recall": 0.9883,
-      "f1": 0.9784,
-      "records": 10216,
-      "true_people": 2510,
-      "predicted_customers": 2575,
-      "people_fully_resolved_pct": 96.41,
-      "customers_mixing_people": 23,
+      "precision": 0.9798,
+      "recall": 0.9912,
+      "f1": 0.9855,
+      "records": 42129,
+      "true_people": 7986,
+      "predicted_customers": 8223,
+      "people_fully_resolved_pct": 96.07,
+      "customers_mixing_people": 80,
       "pairs": {
-        "true_positive": 22586,
-        "predicted": 23314,
-        "true": 22853
+        "true_positive": 127159,
+        "predicted": 129774,
+        "true": 128286
       }
     },
     "tnt_bayside": {
-      "precision": 0.9601,
-      "recall": 0.9879,
-      "f1": 0.9738,
-      "records": 6978,
-      "true_people": 1807,
-      "predicted_customers": 1855,
-      "people_fully_resolved_pct": 96.07,
-      "customers_mixing_people": 21,
+      "precision": 0.9805,
+      "recall": 0.9895,
+      "f1": 0.985,
+      "records": 28474,
+      "true_people": 5660,
+      "predicted_customers": 5852,
+      "people_fully_resolved_pct": 95.65,
+      "customers_mixing_people": 50,
       "pairs": {
-        "true_positive": 14666,
-        "predicted": 15276,
-        "true": 14845
+        "true_positive": 80649,
+        "predicted": 82255,
+        "true": 81501
       }
     },
     "tnt_lonestar": {
-      "precision": 0.9911,
-      "recall": 0.9926,
-      "f1": 0.9918,
-      "records": 5163,
-      "true_people": 1243,
-      "predicted_customers": 1278,
-      "people_fully_resolved_pct": 96.62,
-      "customers_mixing_people": 7,
+      "precision": 0.9783,
+      "recall": 0.9903,
+      "f1": 0.9843,
+      "records": 20336,
+      "true_people": 3993,
+      "predicted_customers": 4132,
+      "people_fully_resolved_pct": 95.62,
+      "customers_mixing_people": 40,
       "pairs": {
-        "true_positive": 11921,
-        "predicted": 12028,
-        "true": 12010
+        "true_positive": 58843,
+        "predicted": 60150,
+        "true": 59418
+      }
+    },
+    "tnt_summit": {
+      "precision": 0.9882,
+      "recall": 0.985,
+      "f1": 0.9866,
+      "records": 15700,
+      "true_people": 3387,
+      "predicted_customers": 3546,
+      "people_fully_resolved_pct": 94.69,
+      "customers_mixing_people": 23,
+      "pairs": {
+        "true_positive": 40225,
+        "predicted": 40704,
+        "true": 40837
+      }
+    },
+    "tnt_desert": {
+      "precision": 0.9727,
+      "recall": 0.9924,
+      "f1": 0.9824,
+      "records": 39850,
+      "true_people": 7346,
+      "predicted_customers": 7533,
+      "people_fully_resolved_pct": 96.28,
+      "customers_mixing_people": 84,
+      "pairs": {
+        "true_positive": 123624,
+        "predicted": 127093,
+        "true": 124573
+      }
+    },
+    "tnt_peachtree": {
+      "precision": 0.9842,
+      "recall": 0.9901,
+      "f1": 0.9872,
+      "records": 25767,
+      "true_people": 5086,
+      "predicted_customers": 5253,
+      "people_fully_resolved_pct": 95.95,
+      "customers_mixing_people": 37,
+      "pairs": {
+        "true_positive": 73331,
+        "predicted": 74507,
+        "true": 74061
+      }
+    },
+    "tnt_lakeshore": {
+      "precision": 0.9764,
+      "recall": 0.9906,
+      "f1": 0.9835,
+      "records": 24071,
+      "true_people": 4535,
+      "predicted_customers": 4664,
+      "people_fully_resolved_pct": 96.12,
+      "customers_mixing_people": 48,
+      "pairs": {
+        "true_positive": 72912,
+        "predicted": 74671,
+        "true": 73603
+      }
+    },
+    "tnt_harbor": {
+      "precision": 0.9781,
+      "recall": 0.9897,
+      "f1": 0.9838,
+      "records": 20100,
+      "true_people": 3943,
+      "predicted_customers": 4066,
+      "people_fully_resolved_pct": 95.79,
+      "customers_mixing_people": 45,
+      "pairs": {
+        "true_positive": 57833,
+        "predicted": 59130,
+        "true": 58437
+      }
+    },
+    "tnt_gulf": {
+      "precision": 0.9843,
+      "recall": 0.9869,
+      "f1": 0.9856,
+      "records": 13417,
+      "true_people": 2829,
+      "predicted_customers": 2951,
+      "people_fully_resolved_pct": 94.95,
+      "customers_mixing_people": 20,
+      "pairs": {
+        "true_positive": 35694,
+        "predicted": 36263,
+        "true": 36167
+      }
+    },
+    "tnt_twincities": {
+      "precision": 0.9936,
+      "recall": 0.9912,
+      "f1": 0.9924,
+      "records": 11710,
+      "true_people": 2268,
+      "predicted_customers": 2347,
+      "people_fully_resolved_pct": 96.03,
+      "customers_mixing_people": 15,
+      "pairs": {
+        "true_positive": 34426,
+        "predicted": 34648,
+        "true": 34733
       }
     }
   },
   "ablation": [
     {
       "rules": "exact phone only",
-      "precision": 0.9932,
-      "recall": 0.8398,
-      "f1": 0.9101,
-      "predicted_customers": 7150
+      "precision": 0.9966,
+      "recall": 0.8407,
+      "f1": 0.912,
+      "predicted_customers": 64049
     },
     {
       "rules": "phone + email",
-      "precision": 0.9807,
-      "recall": 0.9565,
-      "f1": 0.9684,
-      "predicted_customers": 6042
+      "precision": 0.9873,
+      "recall": 0.9618,
+      "f1": 0.9743,
+      "predicted_customers": 51549
     },
     {
       "rules": "+ system ids (ServiceTitan id, job number, lead id)",
-      "precision": 0.9788,
-      "recall": 0.981,
-      "f1": 0.9799,
-      "predicted_customers": 5814
+      "precision": 0.9856,
+      "recall": 0.9833,
+      "f1": 0.9844,
+      "predicted_customers": 49517
     },
     {
       "rules": "+ fuzzy name and address (full)",
-      "precision": 0.9715,
-      "recall": 0.9892,
-      "f1": 0.9803,
-      "predicted_customers": 5708
+      "precision": 0.9798,
+      "recall": 0.9903,
+      "f1": 0.985,
+      "predicted_customers": 48567
     }
   ],
   "edges_by_rule": [
     {
       "rule": "email",
-      "edges": 7143
+      "edges": 83074
     },
     {
       "rule": "external_lead_id",
-      "edges": 208
+      "edges": 2012
     },
     {
       "rule": "fuzzy_name_address",
-      "edges": 22141
+      "edges": 300906
     },
     {
       "rule": "invoice_job",
-      "edges": 4207
+      "edges": 45996
     },
     {
       "rule": "phone",
-      "edges": 15207
+      "edges": 177505
     },
     {
       "rule": "st_customer_id",
-      "edges": 1636
+      "edges": 22607
     }
   ]
 }

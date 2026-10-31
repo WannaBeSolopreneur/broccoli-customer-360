@@ -1,371 +1,1160 @@
 {
   "entity_resolution": {
-    "precision": 0.9715,
-    "recall": 0.9892,
-    "f1": 0.9803,
-    "records": 22357,
-    "true_people": 5560,
-    "predicted_customers": 5708,
-    "people_fully_resolved_pct": 96.35,
-    "customers_mixing_people": 51,
+    "precision": 0.9798,
+    "recall": 0.9903,
+    "f1": 0.985,
+    "records": 241554,
+    "true_people": 47033,
+    "predicted_customers": 48567,
+    "people_fully_resolved_pct": 95.81,
+    "customers_mixing_people": 442,
     "pairs": {
-      "true_positive": 49173,
-      "predicted": 50618,
-      "true": 49708
+      "true_positive": 704696,
+      "predicted": 719195,
+      "true": 711616
     },
     "cross_tenant_key_leaks": 0
   },
   "ablation": [
     {
       "rules": "exact phone only",
-      "precision": 0.9932,
-      "recall": 0.8398,
-      "f1": 0.9101,
-      "predicted_customers": 7150
+      "precision": 0.9966,
+      "recall": 0.8407,
+      "f1": 0.912,
+      "predicted_customers": 64049
     },
     {
       "rules": "phone + email",
-      "precision": 0.9807,
-      "recall": 0.9565,
-      "f1": 0.9684,
-      "predicted_customers": 6042
+      "precision": 0.9873,
+      "recall": 0.9618,
+      "f1": 0.9743,
+      "predicted_customers": 51549
     },
     {
       "rules": "+ system ids (ServiceTitan id, job number, lead id)",
-      "precision": 0.9788,
-      "recall": 0.981,
-      "f1": 0.9799,
-      "predicted_customers": 5814
+      "precision": 0.9856,
+      "recall": 0.9833,
+      "f1": 0.9844,
+      "predicted_customers": 49517
     },
     {
       "rules": "+ fuzzy name and address (full)",
-      "precision": 0.9715,
-      "recall": 0.9892,
-      "f1": 0.9803,
-      "predicted_customers": 5708
+      "precision": 0.9798,
+      "recall": 0.9903,
+      "f1": 0.985,
+      "predicted_customers": 48567
     }
   ],
   "quality": {
-    "checked_at": "2026-10-31 15:25:08",
+    "checked_at": "2026-10-31 15:46:17",
     "as_of": "2026-10-01 06:00:00",
-    "total": 74,
-    "passed": 74,
+    "total": 109,
+    "passed": 109,
     "warnings": 0,
     "errors": 0
   },
   "lead_booking_compare": [
     {
       "tenant_id": "tnt_alpine",
-      "leads": 1288,
-      "by_lead_id_only": 0.2578,
-      "with_entity_resolution": 0.4697,
-      "ground_truth": 0.4697
+      "leads": 4290,
+      "by_lead_id_only": 0.2622,
+      "with_entity_resolution": 0.4552,
+      "ground_truth": 0.4555
     },
     {
       "tenant_id": "tnt_bayside",
-      "leads": 906,
-      "by_lead_id_only": 0.2528,
-      "with_entity_resolution": 0.4525,
-      "ground_truth": 0.4525
+      "leads": 3034,
+      "by_lead_id_only": 0.2531,
+      "with_entity_resolution": 0.4314,
+      "ground_truth": 0.4311
+    },
+    {
+      "tenant_id": "tnt_desert",
+      "leads": 3931,
+      "by_lead_id_only": 0.2852,
+      "with_entity_resolution": 0.4927,
+      "ground_truth": 0.4922
+    },
+    {
+      "tenant_id": "tnt_gulf",
+      "leads": 1527,
+      "by_lead_id_only": 0.2089,
+      "with_entity_resolution": 0.3811,
+      "ground_truth": 0.3798
+    },
+    {
+      "tenant_id": "tnt_harbor",
+      "leads": 2075,
+      "by_lead_id_only": 0.2323,
+      "with_entity_resolution": 0.4265,
+      "ground_truth": 0.426
+    },
+    {
+      "tenant_id": "tnt_lakeshore",
+      "leads": 2471,
+      "by_lead_id_only": 0.2975,
+      "with_entity_resolution": 0.4824,
+      "ground_truth": 0.482
     },
     {
       "tenant_id": "tnt_lonestar",
-      "leads": 617,
-      "by_lead_id_only": 0.2609,
-      "with_entity_resolution": 0.4538,
-      "ground_truth": 0.4538
+      "leads": 2152,
+      "by_lead_id_only": 0.2365,
+      "with_entity_resolution": 0.4043,
+      "ground_truth": 0.4033
+    },
+    {
+      "tenant_id": "tnt_peachtree",
+      "leads": 2684,
+      "by_lead_id_only": 0.2653,
+      "with_entity_resolution": 0.44,
+      "ground_truth": 0.4396
+    },
+    {
+      "tenant_id": "tnt_summit",
+      "leads": 1774,
+      "by_lead_id_only": 0.2046,
+      "with_entity_resolution": 0.3579,
+      "ground_truth": 0.3579
+    },
+    {
+      "tenant_id": "tnt_twincities",
+      "leads": 1192,
+      "by_lead_id_only": 0.2844,
+      "with_entity_resolution": 0.4824,
+      "ground_truth": 0.4824
     }
   ],
   "metrics_by_tenant": {
     "leads_received": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 1288,
-        "rows_used": 1288
+        "value": 4290,
+        "rows_used": 4290
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 906,
-        "rows_used": 906
+        "value": 3034,
+        "rows_used": 3034
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 3931,
+        "rows_used": 3931
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 1527,
+        "rows_used": 1527
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 2075,
+        "rows_used": 2075
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 2471,
+        "rows_used": 2471
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 617,
-        "rows_used": 617
+        "value": 2152,
+        "rows_used": 2152
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 2684,
+        "rows_used": 2684
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 1774,
+        "rows_used": 1774
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 1192,
+        "rows_used": 1192
       }
     ],
     "speed_to_lead_median_sec": [
       {
         "tenant_id": "tnt_alpine",
         "value": 27,
-        "rows_used": 1288
+        "rows_used": 4290
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 858,
-        "rows_used": 906
+        "value": 749,
+        "rows_used": 3034
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 27,
+        "rows_used": 3931
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 776,
+        "rows_used": 1527
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 894,
+        "rows_used": 2075
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 27,
+        "rows_used": 2471
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 811,
-        "rows_used": 617
+        "value": 881,
+        "rows_used": 2152
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 898,
+        "rows_used": 2684
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 753,
+        "rows_used": 1774
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 26,
+        "rows_used": 1192
       }
     ],
     "lead_to_booking_rate": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 0.4697204968944099,
-        "numerator": 605,
-        "denominator": 1288,
-        "rows_used": 1288
+        "value": 0.4552447552447552,
+        "numerator": 1953,
+        "denominator": 4290,
+        "rows_used": 4290
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 0.45253863134657835,
-        "numerator": 410,
-        "denominator": 906,
-        "rows_used": 906
+        "value": 0.43144363876071196,
+        "numerator": 1309,
+        "denominator": 3034,
+        "rows_used": 3034
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 0.4927499364029509,
+        "numerator": 1937,
+        "denominator": 3931,
+        "rows_used": 3931
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 0.381139489194499,
+        "numerator": 582,
+        "denominator": 1527,
+        "rows_used": 1527
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 0.42650602409638555,
+        "numerator": 885,
+        "denominator": 2075,
+        "rows_used": 2075
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 0.48239579117766085,
+        "numerator": 1192,
+        "denominator": 2471,
+        "rows_used": 2471
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 0.4538087520259319,
-        "numerator": 280,
-        "denominator": 617,
-        "rows_used": 617
+        "value": 0.40427509293680297,
+        "numerator": 870,
+        "denominator": 2152,
+        "rows_used": 2152
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 0.44001490312965724,
+        "numerator": 1181,
+        "denominator": 2684,
+        "rows_used": 2684
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 0.3579481397970688,
+        "numerator": 635,
+        "denominator": 1774,
+        "rows_used": 1774
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 0.4823825503355705,
+        "numerator": 575,
+        "denominator": 1192,
+        "rows_used": 1192
       }
     ],
     "call_answer_rate": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 0.9441997063142438,
-        "numerator": 2572,
-        "denominator": 2724,
-        "rows_used": 2724
+        "value": 0.9342987174182872,
+        "numerator": 11291,
+        "denominator": 12085,
+        "rows_used": 12085
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 0.8792319353208691,
-        "numerator": 1740,
-        "denominator": 1979,
-        "rows_used": 1979
+        "value": 0.8849537559214978,
+        "numerator": 7846,
+        "denominator": 8866,
+        "rows_used": 8866
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 0.9199326121652776,
+        "numerator": 10375,
+        "denominator": 11278,
+        "rows_used": 11278
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 0.8455865406775754,
+        "numerator": 3669,
+        "denominator": 4339,
+        "rows_used": 4339
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 0.8925962815405046,
+        "numerator": 5377,
+        "denominator": 6024,
+        "rows_used": 6024
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 0.9169235285483635,
+        "numerator": 6247,
+        "denominator": 6813,
+        "rows_used": 6813
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 0.9147180192572214,
-        "numerator": 1330,
-        "denominator": 1454,
-        "rows_used": 1454
+        "value": 0.9106792945787068,
+        "numerator": 5577,
+        "denominator": 6124,
+        "rows_used": 6124
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 0.9049371747683717,
+        "numerator": 7130,
+        "denominator": 7879,
+        "rows_used": 7879
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 0.8692861311028983,
+        "numerator": 4469,
+        "denominator": 5141,
+        "rows_used": 5141
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 0.9097441793618856,
+        "numerator": 3165,
+        "denominator": 3479,
+        "rows_used": 3479
       }
     ],
     "ai_call_booking_rate": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 0.4832814930015552,
-        "numerator": 1243,
-        "denominator": 2572,
-        "rows_used": 2572
+        "value": 0.4654149322469223,
+        "numerator": 5255,
+        "denominator": 11291,
+        "rows_used": 11291
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 0.4810344827586207,
-        "numerator": 837,
-        "denominator": 1740,
-        "rows_used": 1740
+        "value": 0.4515676777976039,
+        "numerator": 3543,
+        "denominator": 7846,
+        "rows_used": 7846
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 0.5131566265060241,
+        "numerator": 5324,
+        "denominator": 10375,
+        "rows_used": 10375
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 0.40474243663123466,
+        "numerator": 1485,
+        "denominator": 3669,
+        "rows_used": 3669
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 0.4366747256834666,
+        "numerator": 2348,
+        "denominator": 5377,
+        "rows_used": 5377
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 0.49047542820553863,
+        "numerator": 3064,
+        "denominator": 6247,
+        "rows_used": 6247
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 0.48270676691729325,
-        "numerator": 642,
-        "denominator": 1330,
-        "rows_used": 1330
+        "value": 0.4272906580598888,
+        "numerator": 2383,
+        "denominator": 5577,
+        "rows_used": 5577
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 0.4691444600280505,
+        "numerator": 3345,
+        "denominator": 7130,
+        "rows_used": 7130
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 0.3701051689415977,
+        "numerator": 1654,
+        "denominator": 4469,
+        "rows_used": 4469
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 0.48530805687203793,
+        "numerator": 1536,
+        "denominator": 3165,
+        "rows_used": 3165
       }
     ],
     "booked_revenue": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 4393346.09999999,
-        "rows_used": 1541
+        "value": 17451739.189999998,
+        "rows_used": 6214
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 688545.4000000001,
-        "rows_used": 1060
+        "value": 2628110.150000003,
+        "rows_used": 4171
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 16889855.28000005,
+        "rows_used": 6221
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 4926912.440000001,
+        "rows_used": 1760
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 7662723.969999995,
+        "rows_used": 2760
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 8778761.779999997,
+        "rows_used": 3647
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 1880102.3399999985,
-        "rows_used": 769
+        "value": 6319854.2799999975,
+        "rows_used": 2797
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 2515493.9799999986,
+        "rows_used": 3894
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 5099047.180000004,
+        "rows_used": 1975
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 1116449.4800000016,
+        "rows_used": 1813
       }
     ],
     "completed_revenue": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 6071473.459999997,
-        "rows_used": 2163
+        "value": 25398318.740000006,
+        "rows_used": 9154
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 945298.7699999993,
-        "rows_used": 1474
+        "value": 3851373.4200000097,
+        "rows_used": 6123
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 24346796.319999926,
+        "rows_used": 8785
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 8018681.790000006,
+        "rows_used": 2806
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 11755489.35,
+        "rows_used": 4224
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 12858158.280000018,
+        "rows_used": 5257
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 2647994.1700000023,
-        "rows_used": 1072
+        "value": 9795286.880000006,
+        "rows_used": 4265
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 3700917.54,
+        "rows_used": 5722
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 8258197.120000008,
+        "rows_used": 3212
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 1639108.3299999987,
+        "rows_used": 2608
       }
     ],
     "active_customers": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 1562,
-        "rows_used": 2163
+        "value": 5551,
+        "rows_used": 9154
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 1078,
-        "rows_used": 1474
+        "value": 3829,
+        "rows_used": 6123
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 5195,
+        "rows_used": 8785
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 1831,
+        "rows_used": 2806
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 2636,
+        "rows_used": 4224
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 3162,
+        "rows_used": 5257
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 764,
-        "rows_used": 1072
+        "value": 2654,
+        "rows_used": 4265
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 3567,
+        "rows_used": 5722
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 2121,
+        "rows_used": 3212
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 1591,
+        "rows_used": 2608
       }
     ],
     "revenue_per_customer": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 3886.9868501920596,
-        "numerator": 6071473.459999997,
-        "denominator": 1562,
-        "rows_used": 2163
+        "value": 4575.449241578095,
+        "numerator": 25398318.740000006,
+        "denominator": 5551,
+        "rows_used": 9154
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 876.9005287569566,
-        "numerator": 945298.7699999993,
-        "denominator": 1078,
-        "rows_used": 1474
+        "value": 1005.8431496474301,
+        "numerator": 3851373.4200000097,
+        "denominator": 3829,
+        "rows_used": 6123
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 4686.582544754558,
+        "numerator": 24346796.319999926,
+        "denominator": 5195,
+        "rows_used": 8785
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 4379.400212998365,
+        "numerator": 8018681.790000006,
+        "denominator": 1831,
+        "rows_used": 2806
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 4459.593835356601,
+        "numerator": 11755489.35,
+        "denominator": 2636,
+        "rows_used": 4224
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 4066.463719165091,
+        "numerator": 12858158.280000018,
+        "denominator": 3162,
+        "rows_used": 5257
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 3465.960955497385,
-        "numerator": 2647994.1700000023,
-        "denominator": 764,
-        "rows_used": 1072
+        "value": 3690.7637076111555,
+        "numerator": 9795286.880000006,
+        "denominator": 2654,
+        "rows_used": 4265
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 1037.54346509672,
+        "numerator": 3700917.54,
+        "denominator": 3567,
+        "rows_used": 5722
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 3893.5394247996264,
+        "numerator": 8258197.120000008,
+        "denominator": 2121,
+        "rows_used": 3212
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 1030.237793840351,
+        "numerator": 1639108.3299999987,
+        "denominator": 1591,
+        "rows_used": 2608
       }
     ],
     "membership_renewal_rate": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 0.7226027397260274,
-        "numerator": 211,
-        "denominator": 292,
-        "rows_used": 292
+        "value": 0.6954022988505747,
+        "numerator": 1331,
+        "denominator": 1914,
+        "rows_used": 1914
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 0.6972477064220184,
-        "numerator": 152,
-        "denominator": 218,
-        "rows_used": 218
+        "value": 0.7143933685003768,
+        "numerator": 948,
+        "denominator": 1327,
+        "rows_used": 1327
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 0.7811791383219955,
+        "numerator": 1378,
+        "denominator": 1764,
+        "rows_used": 1764
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 0.49107142857142855,
+        "numerator": 330,
+        "denominator": 672,
+        "rows_used": 672
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 0.674892703862661,
+        "numerator": 629,
+        "denominator": 932,
+        "rows_used": 932
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 0.6357738646895273,
+        "numerator": 686,
+        "denominator": 1079,
+        "rows_used": 1079
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 0.5460526315789473,
-        "numerator": 83,
-        "denominator": 152,
-        "rows_used": 152
+        "value": 0.5900216919739696,
+        "numerator": 544,
+        "denominator": 922,
+        "rows_used": 922
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 0.631979695431472,
+        "numerator": 747,
+        "denominator": 1182,
+        "rows_used": 1182
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 0.48048780487804876,
+        "numerator": 394,
+        "denominator": 820,
+        "rows_used": 820
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 0.6648648648648648,
+        "numerator": 369,
+        "denominator": 555,
+        "rows_used": 555
       }
     ],
     "invoice_collection_rate": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 0.8846603844077903,
-        "numerator": 5526521.600000006,
-        "denominator": 6247054.4600000065,
-        "rows_used": 3092
+        "value": 0.8832319434377901,
+        "numerator": 23064439.639999997,
+        "denominator": 26113683.739999976,
+        "rows_used": 12939
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 0.8717508174026101,
-        "numerator": 912650.5499999996,
-        "denominator": 1046916.7699999992,
-        "rows_used": 1975
+        "value": 0.8779001070215532,
+        "numerator": 3716641.39,
+        "denominator": 4233558.420000003,
+        "rows_used": 7898
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 0.8796881919799568,
+        "numerator": 22015962.819999985,
+        "denominator": 25027007.320000045,
+        "rows_used": 12384
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 0.8743306349453933,
+        "numerator": 7110088.890000013,
+        "denominator": 8132036.790000017,
+        "rows_used": 3547
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 0.8671697528550011,
+        "numerator": 10490490.999999955,
+        "denominator": 12097390.349999977,
+        "rows_used": 6033
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 0.8770618243882318,
+        "numerator": 11512959.270000013,
+        "denominator": 13126736.280000025,
+        "rows_used": 7339
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 0.8926460398335508,
-        "numerator": 2416230.52,
-        "denominator": 2706818.170000001,
-        "rows_used": 1528
+        "value": 0.8842362088987846,
+        "numerator": 8859024.529999983,
+        "denominator": 10018843.879999992,
+        "rows_used": 5998
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 0.8833158757188613,
+        "numerator": 3558893.39,
+        "denominator": 4029015.539999999,
+        "rows_used": 7218
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 0.8693037713894493,
+        "numerator": 7295838.900000005,
+        "denominator": 8392738.12000001,
+        "rows_used": 4123
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 0.8857275921085951,
+        "numerator": 1591299.3699999982,
+        "denominator": 1796601.3299999987,
+        "rows_used": 3334
       }
     ],
     "ticket_resolution_median_hours": [
       {
         "tenant_id": "tnt_alpine",
-        "value": 15.4,
-        "rows_used": 481
+        "value": 13.333333333333334,
+        "rows_used": 2002
       },
       {
         "tenant_id": "tnt_bayside",
-        "value": 13.6,
-        "rows_used": 355
+        "value": 13.683333333333334,
+        "rows_used": 1419
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 13.366666666666667,
+        "rows_used": 1823
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 13,
+        "rows_used": 679
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 13.55,
+        "rows_used": 999
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 12.933333333333334,
+        "rows_used": 1150
       },
       {
         "tenant_id": "tnt_lonestar",
-        "value": 16.166666666666668,
-        "rows_used": 247
+        "value": 14.8,
+        "rows_used": 1012
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 13.283333333333333,
+        "rows_used": 1194
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 14.633333333333333,
+        "rows_used": 872
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 13.133333333333333,
+        "rows_used": 633
+      }
+    ],
+    "missed_calls": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 794,
+        "rows_used": 794
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 1020,
+        "rows_used": 1020
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 903,
+        "rows_used": 903
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 670,
+        "rows_used": 670
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 647,
+        "rows_used": 647
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 566,
+        "rows_used": 566
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 547,
+        "rows_used": 547
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 749,
+        "rows_used": 749
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 672,
+        "rows_used": 672
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 314,
+        "rows_used": 314
+      }
+    ],
+    "after_hours_booked_revenue": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 7823956.519999991,
+        "rows_used": 2868
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 1005302.4299999995,
+        "rows_used": 1598
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 8078782.539999994,
+        "rows_used": 2872
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 1862259.069999999,
+        "rows_used": 651
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 2721993.05,
+        "rows_used": 1032
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 3925743.9700000016,
+        "rows_used": 1623
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 2469547.8300000033,
+        "rows_used": 1087
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 889184.8499999986,
+        "rows_used": 1393
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 1840208.5700000008,
+        "rows_used": 742
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 505329.1000000004,
+        "rows_used": 828
+      }
+    ],
+    "repeat_customer_rate": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 0.4599171320482796,
+        "numerator": 2553,
+        "denominator": 5551,
+        "rows_used": 8223
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 0.43118307652128496,
+        "numerator": 1651,
+        "denominator": 3829,
+        "rows_used": 5852
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 0.4743022136669875,
+        "numerator": 2464,
+        "denominator": 5195,
+        "rows_used": 7533
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 0.3926815947569634,
+        "numerator": 719,
+        "denominator": 1831,
+        "rows_used": 2951
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 0.4336115326251897,
+        "numerator": 1143,
+        "denominator": 2636,
+        "rows_used": 4066
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 0.46268184693232134,
+        "numerator": 1463,
+        "denominator": 3162,
+        "rows_used": 4664
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 0.4351921627731726,
+        "numerator": 1155,
+        "denominator": 2654,
+        "rows_used": 4132
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 0.4334174376226521,
+        "numerator": 1546,
+        "denominator": 3567,
+        "rows_used": 5253
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 0.3983969825553984,
+        "numerator": 845,
+        "denominator": 2121,
+        "rows_used": 3546
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 0.4512884978001257,
+        "numerator": 718,
+        "denominator": 1591,
+        "rows_used": 2347
+      }
+    ],
+    "repeat_customers_found_by_matching": [
+      {
+        "tenant_id": "tnt_alpine",
+        "value": 171,
+        "rows_used": 171
+      },
+      {
+        "tenant_id": "tnt_bayside",
+        "value": 112,
+        "rows_used": 112
+      },
+      {
+        "tenant_id": "tnt_desert",
+        "value": 157,
+        "rows_used": 157
+      },
+      {
+        "tenant_id": "tnt_gulf",
+        "value": 51,
+        "rows_used": 51
+      },
+      {
+        "tenant_id": "tnt_harbor",
+        "value": 63,
+        "rows_used": 63
+      },
+      {
+        "tenant_id": "tnt_lakeshore",
+        "value": 97,
+        "rows_used": 97
+      },
+      {
+        "tenant_id": "tnt_lonestar",
+        "value": 79,
+        "rows_used": 79
+      },
+      {
+        "tenant_id": "tnt_peachtree",
+        "value": 110,
+        "rows_used": 110
+      },
+      {
+        "tenant_id": "tnt_summit",
+        "value": 57,
+        "rows_used": 57
+      },
+      {
+        "tenant_id": "tnt_twincities",
+        "value": 43,
+        "rows_used": 43
       }
     ]
   },
   "benchmarks": [
     {
       "metric": "ai_call_booking_rate",
-      "n_tenants": 3,
-      "average": 0.4823409142258231,
-      "p25": null,
-      "median": null,
-      "p75": null
+      "n_tenants": 10,
+      "average": 0.45138801709723647,
+      "p25": 0.4296366749657833,
+      "median": 0.4584913050222631,
+      "p75": 0.48126715766104106
     },
     {
       "metric": "call_answer_rate",
-      "n_tenants": 3,
-      "average": 0.9127165536307781,
-      "p25": null,
-      "median": null,
-      "p75": null
+      "n_tenants": 10,
+      "average": 0.8988938216083368,
+      "p25": 0.8868643873262495,
+      "median": 0.9073406770651287,
+      "p75": 0.9153624700559493
     },
     {
       "metric": "lead_to_booking_rate",
-      "n_tenants": 3,
-      "average": 0.45868929342230674,
-      "p25": null,
-      "median": null,
-      "p75": null
+      "n_tenants": 10,
+      "average": 0.4354100321076063,
+      "p25": 0.4098328257266986,
+      "median": 0.4357292709451846,
+      "p75": 0.47559810156286664
     },
     {
       "metric": "membership_renewal_rate",
-      "n_tenants": 3,
-      "average": 0.6553010259089976,
-      "p25": null,
-      "median": null,
-      "p75": null
+      "n_tenants": 10,
+      "average": 0.6360066859944921,
+      "p25": 0.6005111928383452,
+      "median": 0.6503193647771961,
+      "p75": 0.6902749001035963
+    },
+    {
+      "metric": "repeat_customer_rate",
+      "n_tenants": 10,
+      "average": 0.4372672477302375,
+      "p25": 0.43174166679662673,
+      "median": 0.4344018476991811,
+      "p75": 0.45775997348624115
     },
     {
       "metric": "revenue_per_customer",
-      "n_tenants": 3,
-      "average": 2743.2827781488,
-      "p25": null,
-      "median": null,
-      "p75": null
+      "n_tenants": 10,
+      "average": 3282.541709484799,
+      "p25": 1700.8485257253287,
+      "median": 3980.0015719823587,
+      "p75": 4439.545429767042
     },
     {
       "metric": "speed_to_lead_median_sec",
-      "n_tenants": 3,
-      "average": 565.3333333333334,
-      "p25": null,
-      "median": null,
-      "p75": null
+      "n_tenants": 10,
+      "average": 505.8,
+      "p25": 27,
+      "median": 751,
+      "p75": 854.75
     }
   ]
 }

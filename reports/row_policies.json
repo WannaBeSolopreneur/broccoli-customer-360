@@ -8,8 +8,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 2575,
-      "rows_expected": 2575,
+      "rows_seen": 8223,
+      "rows_expected": 8223,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -19,8 +19,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 5995,
-      "rows_expected": 5995,
+      "rows_seen": 22824,
+      "rows_expected": 22824,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -30,8 +30,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 1288,
-      "rows_expected": 1288,
+      "rows_seen": 4290,
+      "rows_expected": 4290,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -41,8 +41,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 2534,
-      "rows_expected": 2534,
+      "rows_seen": 10469,
+      "rows_expected": 10469,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -52,8 +52,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 3092,
-      "rows_expected": 3092,
+      "rows_seen": 12939,
+      "rows_expected": 12939,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -63,8 +63,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 481,
-      "rows_expected": 481,
+      "rows_seen": 2005,
+      "rows_expected": 2005,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -74,8 +74,8 @@
       "tenants_seen": [
         "tnt_alpine"
       ],
-      "rows_seen": 929,
-      "rows_expected": 929,
+      "rows_seen": 3785,
+      "rows_expected": 3785,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -85,8 +85,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 1855,
-      "rows_expected": 1855,
+      "rows_seen": 5852,
+      "rows_expected": 5852,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -96,8 +96,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 4212,
-      "rows_expected": 4212,
+      "rows_seen": 16449,
+      "rows_expected": 16449,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -107,8 +107,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 906,
-      "rows_expected": 906,
+      "rows_seen": 3034,
+      "rows_expected": 3034,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -118,8 +118,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 1704,
-      "rows_expected": 1704,
+      "rows_seen": 7002,
+      "rows_expected": 7002,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -129,8 +129,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 1975,
-      "rows_expected": 1975,
+      "rows_seen": 7898,
+      "rows_expected": 7898,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -140,8 +140,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 357,
-      "rows_expected": 357,
+      "rows_seen": 1420,
+      "rows_expected": 1420,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -151,8 +151,8 @@
       "tenants_seen": [
         "tnt_bayside"
       ],
-      "rows_seen": 682,
-      "rows_expected": 682,
+      "rows_seen": 2565,
+      "rows_expected": 2565,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -162,8 +162,8 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 1278,
-      "rows_expected": 1278,
+      "rows_seen": 4132,
+      "rows_expected": 4132,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -173,8 +173,8 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 3037,
-      "rows_expected": 3037,
+      "rows_seen": 11506,
+      "rows_expected": 11506,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -184,8 +184,8 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 617,
-      "rows_expected": 617,
+      "rows_seen": 2152,
+      "rows_expected": 2152,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -195,8 +195,8 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 1263,
-      "rows_expected": 1263,
+      "rows_seen": 4885,
+      "rows_expected": 4885,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -206,8 +206,8 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 1528,
-      "rows_expected": 1528,
+      "rows_seen": 5998,
+      "rows_expected": 5998,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -217,8 +217,8 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 247,
-      "rows_expected": 247,
+      "rows_seen": 1013,
+      "rows_expected": 1013,
       "other_tenant_rows": 0,
       "ok": true
     },
@@ -228,8 +228,547 @@
       "tenants_seen": [
         "tnt_lonestar"
       ],
-      "rows_seen": 456,
-      "rows_expected": 456,
+      "rows_seen": 1733,
+      "rows_expected": 1733,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 3546,
+      "rows_expected": 3546,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 9576,
+      "rows_expected": 9576,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 1774,
+      "rows_expected": 1774,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 3665,
+      "rows_expected": 3665,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 4123,
+      "rows_expected": 4123,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 878,
+      "rows_expected": 878,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_summit",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_summit"
+      ],
+      "rows_seen": 1359,
+      "rows_expected": 1359,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 7533,
+      "rows_expected": 7533,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 21103,
+      "rows_expected": 21103,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 3931,
+      "rows_expected": 3931,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 10105,
+      "rows_expected": 10105,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 12384,
+      "rows_expected": 12384,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 1825,
+      "rows_expected": 1825,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_desert",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_desert"
+      ],
+      "rows_seen": 3599,
+      "rows_expected": 3599,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 5253,
+      "rows_expected": 5253,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 14587,
+      "rows_expected": 14587,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 2684,
+      "rows_expected": 2684,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 6568,
+      "rows_expected": 6568,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 7218,
+      "rows_expected": 7218,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 1194,
+      "rows_expected": 1194,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_peachtree",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_peachtree"
+      ],
+      "rows_seen": 2202,
+      "rows_expected": 2202,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 4664,
+      "rows_expected": 4664,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 12924,
+      "rows_expected": 12924,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 2471,
+      "rows_expected": 2471,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 6076,
+      "rows_expected": 6076,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 7339,
+      "rows_expected": 7339,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 1150,
+      "rows_expected": 1150,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_lakeshore",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_lakeshore"
+      ],
+      "rows_seen": 2082,
+      "rows_expected": 2082,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 4066,
+      "rows_expected": 4066,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 11413,
+      "rows_expected": 11413,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 2075,
+      "rows_expected": 2075,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 4810,
+      "rows_expected": 4810,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 6033,
+      "rows_expected": 6033,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 1000,
+      "rows_expected": 1000,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_harbor",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_harbor"
+      ],
+      "rows_seen": 1809,
+      "rows_expected": 1809,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 2951,
+      "rows_expected": 2951,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 8238,
+      "rows_expected": 8238,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 1527,
+      "rows_expected": 1527,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 3202,
+      "rows_expected": 3202,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 3547,
+      "rows_expected": 3547,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 681,
+      "rows_expected": 681,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_gulf",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_gulf"
+      ],
+      "rows_seen": 1145,
+      "rows_expected": 1145,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "dim_customer",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 2347,
+      "rows_expected": 2347,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "fct_calls",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 6472,
+      "rows_expected": 6472,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "fct_leads",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 1192,
+      "rows_expected": 1192,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "fct_jobs",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 2989,
+      "rows_expected": 2989,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "fct_invoices",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 3334,
+      "rows_expected": 3334,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "fct_tickets",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 634,
+      "rows_expected": 634,
+      "other_tenant_rows": 0,
+      "ok": true
+    },
+    {
+      "tenant": "tnt_twincities",
+      "table": "fct_memberships",
+      "tenants_seen": [
+        "tnt_twincities"
+      ],
+      "rows_seen": 1057,
+      "rows_expected": 1057,
       "other_tenant_rows": 0,
       "ok": true
     }
