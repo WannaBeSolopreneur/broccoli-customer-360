@@ -2,6 +2,8 @@
 
 Hi Broccoli team, I built this to show how I would approach your Founding Data Engineer role.
 
+Live demo: https://wannabesolopreneur.github.io/broccoli-customer-360-demo/
+
 It is a small, working version of the data layer in your job post. It runs on ClickHouse. One command builds it all and tests it.
 
 The data is 10 made up contractors and about 305,000 rows over 12 months. It covers HVAC, plumbing, electrical and roofing in 10 cities.
